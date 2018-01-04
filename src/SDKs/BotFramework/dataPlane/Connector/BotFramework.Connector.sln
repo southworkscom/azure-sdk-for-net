@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Azure.BotFramework.Connector", "BotFramework.Connector\Microsoft.Azure.BotFramework.Connector.csproj", "{762992E6-DF5F-4FE1-82E1-095B6D24E60E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Azure.BotFramework.Connector.Tests", "BotFramework.Connector.Tests\Microsoft.Azure.BotFramework.Connector.Tests.csproj", "{8054890F-4975-47C7-AEB1-2E4DD4DE1C9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{762992E6-DF5F-4FE1-82E1-095B6D24E60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{762992E6-DF5F-4FE1-82E1-095B6D24E60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{762992E6-DF5F-4FE1-82E1-095B6D24E60E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8054890F-4975-47C7-AEB1-2E4DD4DE1C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8054890F-4975-47C7-AEB1-2E4DD4DE1C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8054890F-4975-47C7-AEB1-2E4DD4DE1C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8054890F-4975-47C7-AEB1-2E4DD4DE1C9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
