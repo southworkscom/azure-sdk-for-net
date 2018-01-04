@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// A response containing a resource ID
+    /// A response containing a resource ID.
     /// </summary>
     public partial class ResourceResponse
     {
@@ -29,7 +29,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the ResourceResponse class.
         /// </summary>
-        /// <param name="id">Id of the resource</param>
+        /// <param name="id">Id of the resource.</param>
         public ResourceResponse(string id = default(string))
         {
             Id = id;
@@ -42,7 +42,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets id of the resource
+        /// Gets or sets id of the resource.
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }

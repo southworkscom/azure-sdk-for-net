@@ -10,13 +10,14 @@
 
 namespace Microsoft.Azure.BotFramework.Connector.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// Parameters for creating a new conversation
+    /// Parameters for creating a new conversation.
     /// </summary>
     public partial class ConversationParameters
     {
@@ -31,16 +32,18 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the ConversationParameters class.
         /// </summary>
-        /// <param name="isGroup">IsGroup</param>
-        /// <param name="bot">The bot address for this conversation</param>
-        /// <param name="members">Members to add to the conversation</param>
-        /// <param name="topicName">(Optional) Topic of the conversation (if
-        /// supported by the channel)</param>
-        /// <param name="activity">(Optional) When creating a new conversation,
-        /// use this activity as the intial message to the conversation</param>
+        /// <param name="bot">The bot address for this conversation.</param>
+        /// <param name="members">Members to add to the conversation.</param>
+        /// <param name="isGroup">Indicates if this is a group
+        /// conversation.</param>
+        /// <param name="topicName">(Optional) Topic title of a conversation
+        /// (if supported by the channel).</param>
+        /// <param name="activity">(Optional) Use this activity as the initial
+        /// message to the conversation when creating a new
+        /// conversation.</param>
         /// <param name="channelData">Channel specific payload for creating the
-        /// conversation</param>
-        public ConversationParameters(bool? isGroup = default(bool?), ChannelAccount bot = default(ChannelAccount), IList<ChannelAccount> members = default(IList<ChannelAccount>), string topicName = default(string), Activity activity = default(Activity), object channelData = default(object))
+        /// conversation.</param>
+        public ConversationParameters(ChannelAccount bot, IList<ChannelAccount> members, bool? isGroup = default(bool?), string topicName = default(string), Activity activity = default(Activity), object channelData = default(object))
         {
             IsGroup = isGroup;
             Bot = bot;
@@ -57,42 +60,64 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets isGroup
+        /// Gets or sets indicates if this is a group conversation.
         /// </summary>
         [JsonProperty(PropertyName = "isGroup")]
         public bool? IsGroup { get; set; }
 
         /// <summary>
-        /// Gets or sets the bot address for this conversation
+        /// Gets or sets the bot address for this conversation.
         /// </summary>
         [JsonProperty(PropertyName = "bot")]
         public ChannelAccount Bot { get; set; }
 
         /// <summary>
-        /// Gets or sets members to add to the conversation
+        /// Gets or sets members to add to the conversation.
         /// </summary>
         [JsonProperty(PropertyName = "members")]
         public IList<ChannelAccount> Members { get; set; }
 
         /// <summary>
-        /// Gets or sets (Optional) Topic of the conversation (if supported by
-        /// the channel)
+        /// Gets or sets (Optional) Topic title of a conversation (if supported
+        /// by the channel).
         /// </summary>
         [JsonProperty(PropertyName = "topicName")]
         public string TopicName { get; set; }
 
         /// <summary>
-        /// Gets or sets (Optional) When creating a new conversation, use this
-        /// activity as the intial message to the conversation
+        /// Gets or sets (Optional) Use this activity as the initial message to
+        /// the conversation when creating a new conversation.
         /// </summary>
         [JsonProperty(PropertyName = "activity")]
         public Activity Activity { get; set; }
 
         /// <summary>
-        /// Gets or sets channel specific payload for creating the conversation
+        /// Gets or sets channel specific payload for creating the
+        /// conversation.
         /// </summary>
         [JsonProperty(PropertyName = "channelData")]
         public object ChannelData { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (Bot == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Bot");
+            }
+            if (Members == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Members");
+            }
+            if (Activity != null)
+            {
+                Activity.Validate();
+            }
+        }
     }
 }

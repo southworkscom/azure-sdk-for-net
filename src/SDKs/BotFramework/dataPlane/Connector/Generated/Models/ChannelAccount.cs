@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Channel account information needed to route a message
+    /// Channel account information needed to route a message.
     /// </summary>
     public partial class ChannelAccount
     {
@@ -30,8 +30,8 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the ChannelAccount class.
         /// </summary>
         /// <param name="id">Channel id for the user or bot on this channel
-        /// (Example: joe@smith.com, or @joesmith or 123456)</param>
-        /// <param name="name">Display friendly name</param>
+        /// (Example: joe@smith.com, or @joesmith or 123456).</param>
+        /// <param name="name">Display friendly name.</param>
         public ChannelAccount(string id = default(string), string name = default(string))
         {
             Id = id;
@@ -46,13 +46,13 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
         /// <summary>
         /// Gets or sets channel id for the user or bot on this channel
-        /// (Example: joe@smith.com, or @joesmith or 123456)
+        /// (Example: joe@smith.com, or @joesmith or 123456).
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets display friendly name
+        /// Gets or sets display friendly name.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

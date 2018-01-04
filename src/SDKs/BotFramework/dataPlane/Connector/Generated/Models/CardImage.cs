@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// An image on a card
+    /// An image on a card.
     /// </summary>
     public partial class CardImage
     {
@@ -32,10 +32,9 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <param name="url">URL Thumbnail image for major content
         /// property.</param>
         /// <param name="alt">Image description intended for screen
-        /// readers</param>
-        /// <param name="tap">Action assigned to specific
-        /// Attachment.E.g.navigate to specific URL or play/open media
-        /// content</param>
+        /// readers.</param>
+        /// <param name="tap">Action assigned to specific Attachment.
+        /// E.g.navigate to specific URL or play/open media content.</param>
         public CardImage(string url = default(string), string alt = default(string), CardAction tap = default(CardAction))
         {
             Url = url;
@@ -56,14 +55,14 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         public string Url { get; set; }
 
         /// <summary>
-        /// Gets or sets image description intended for screen readers
+        /// Gets or sets image description intended for screen readers.
         /// </summary>
         [JsonProperty(PropertyName = "alt")]
         public string Alt { get; set; }
 
         /// <summary>
-        /// Gets or sets action assigned to specific Attachment.E.g.navigate to
-        /// specific URL or play/open media content
+        /// Gets or sets action assigned to specific Attachment. E.g.navigate
+        /// to specific URL or play/open media content.
         /// </summary>
         [JsonProperty(PropertyName = "tap")]
         public CardAction Tap { get; set; }

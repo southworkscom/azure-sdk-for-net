@@ -16,7 +16,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// A receipt card
+    /// A receipt card.
     /// </summary>
     public partial class ReceiptCard
     {
@@ -31,20 +31,22 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the ReceiptCard class.
         /// </summary>
-        /// <param name="title">Title of the card</param>
-        /// <param name="items">Array of Receipt Items</param>
-        /// <param name="facts">Array of Fact Objects   Array of key-value
-        /// pairs.</param>
+        /// <param name="title">Title displayed at the top of the
+        /// receipt.</param>
+        /// <param name="items">Array of Receipt Items.</param>
+        /// <param name="facts">Array of Fact objects (key-value pairs) that
+        /// specify information about the purchase.</param>
         /// <param name="tap">This action will be activated when user taps on
-        /// the card</param>
-        /// <param name="total">Total amount of money paid (or should be
-        /// paid)</param>
-        /// <param name="tax">Total amount of TAX paid(or should be
-        /// paid)</param>
-        /// <param name="vat">Total amount of VAT paid(or should be
-        /// paid)</param>
+        /// the card.</param>
+        /// <param name="total">A currency-formatted string that specifies the
+        /// total purchase price, including all applicable taxes.</param>
+        /// <param name="tax">A currency-formatted string that specifies the
+        /// amount of tax applied to the purchase.</param>
+        /// <param name="vat">A currency-formatted string that specifies the
+        /// amount of value added tax (VAT) applied to the purchase
+        /// price.</param>
         /// <param name="buttons">Set of actions applicable to the current
-        /// card</param>
+        /// card.</param>
         public ReceiptCard(string title = default(string), IList<ReceiptItem> items = default(IList<ReceiptItem>), IList<Fact> facts = default(IList<Fact>), CardAction tap = default(CardAction), string total = default(string), string tax = default(string), string vat = default(string), IList<CardAction> buttons = default(IList<CardAction>))
         {
             Title = title;
@@ -64,50 +66,54 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets title of the card
+        /// Gets or sets title displayed at the top of the receipt.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets array of Receipt Items
+        /// Gets or sets array of Receipt Items.
         /// </summary>
         [JsonProperty(PropertyName = "items")]
         public IList<ReceiptItem> Items { get; set; }
 
         /// <summary>
-        /// Gets or sets array of Fact Objects   Array of key-value pairs.
+        /// Gets or sets array of Fact objects (key-value pairs) that specify
+        /// information about the purchase.
         /// </summary>
         [JsonProperty(PropertyName = "facts")]
         public IList<Fact> Facts { get; set; }
 
         /// <summary>
         /// Gets or sets this action will be activated when user taps on the
-        /// card
+        /// card.
         /// </summary>
         [JsonProperty(PropertyName = "tap")]
         public CardAction Tap { get; set; }
 
         /// <summary>
-        /// Gets or sets total amount of money paid (or should be paid)
+        /// Gets or sets a currency-formatted string that specifies the total
+        /// purchase price, including all applicable taxes.
         /// </summary>
         [JsonProperty(PropertyName = "total")]
         public string Total { get; set; }
 
         /// <summary>
-        /// Gets or sets total amount of TAX paid(or should be paid)
+        /// Gets or sets a currency-formatted string that specifies the amount
+        /// of tax applied to the purchase.
         /// </summary>
         [JsonProperty(PropertyName = "tax")]
         public string Tax { get; set; }
 
         /// <summary>
-        /// Gets or sets total amount of VAT paid(or should be paid)
+        /// Gets or sets a currency-formatted string that specifies the amount
+        /// of value added tax (VAT) applied to the purchase price.
         /// </summary>
         [JsonProperty(PropertyName = "vat")]
         public string Vat { get; set; }
 
         /// <summary>
-        /// Gets or sets set of actions applicable to the current card
+        /// Gets or sets set of actions applicable to the current card.
         /// </summary>
         [JsonProperty(PropertyName = "buttons")]
         public IList<CardAction> Buttons { get; set; }

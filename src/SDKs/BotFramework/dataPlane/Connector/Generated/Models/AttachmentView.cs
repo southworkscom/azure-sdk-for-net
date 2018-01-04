@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Attachment View name and size
+    /// Attachment View name and size.
     /// </summary>
     public partial class AttachmentView
     {
@@ -29,8 +29,8 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the AttachmentView class.
         /// </summary>
-        /// <param name="viewId">content type of the attachmnet</param>
-        /// <param name="size">Name of the attachment</param>
+        /// <param name="viewId">View ID.</param>
+        /// <param name="size">Size of the file.</param>
         public AttachmentView(string viewId = default(string), int? size = default(int?))
         {
             ViewId = viewId;
@@ -44,13 +44,13 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets content type of the attachmnet
+        /// Gets or sets view ID.
         /// </summary>
         [JsonProperty(PropertyName = "viewId")]
         public string ViewId { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the attachment
+        /// Gets or sets size of the file.
         /// </summary>
         [JsonProperty(PropertyName = "size")]
         public int? Size { get; set; }

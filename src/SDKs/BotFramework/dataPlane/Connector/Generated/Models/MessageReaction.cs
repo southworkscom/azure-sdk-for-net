@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Message reaction object
+    /// Message reaction object.
     /// </summary>
     public partial class MessageReaction
     {
@@ -29,7 +29,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the MessageReaction class.
         /// </summary>
-        /// <param name="type">Message reaction type</param>
+        /// <param name="type">Message reaction type.</param>
         public MessageReaction(string type = default(string))
         {
             Type = type;
@@ -42,7 +42,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets message reaction type
+        /// Gets or sets message reaction type.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }

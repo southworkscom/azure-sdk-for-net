@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// An HTTP API response
+    /// An HTTP API response.
     /// </summary>
     public partial class ErrorResponse
     {
@@ -29,7 +29,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the ErrorResponse class.
         /// </summary>
-        /// <param name="error">Error message</param>
+        /// <param name="error">Error message.</param>
         public ErrorResponse(Error error = default(Error))
         {
             Error = error;
@@ -42,7 +42,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets error message
+        /// Gets or sets error message.
         /// </summary>
         [JsonProperty(PropertyName = "error")]
         public Error Error { get; set; }

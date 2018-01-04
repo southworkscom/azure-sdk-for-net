@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// An object relating to a particular point in a conversation
+    /// An object relating to a particular point in a conversation.
     /// </summary>
     public partial class ConversationReference
     {
@@ -30,14 +30,15 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the ConversationReference class.
         /// </summary>
         /// <param name="activityId">(Optional) ID of the activity to refer
-        /// to</param>
+        /// to.</param>
         /// <param name="user">(Optional) User participating in this
-        /// conversation</param>
-        /// <param name="bot">Bot participating in this conversation</param>
-        /// <param name="conversation">Conversation reference</param>
-        /// <param name="channelId">Channel ID</param>
+        /// conversation.</param>
+        /// <param name="bot">Bot participating in this conversation.</param>
+        /// <param name="conversation">Conversation reference.</param>
+        /// <param name="channelId">An ID that uniquely identifies the channel
+        /// in the conversation that this object references.</param>
         /// <param name="serviceUrl">Service endpoint where operations
-        /// concerning the referenced conversation may be performed</param>
+        /// concerning the referenced conversation may be performed.</param>
         public ConversationReference(string activityId = default(string), ChannelAccount user = default(ChannelAccount), ChannelAccount bot = default(ChannelAccount), ConversationAccount conversation = default(ConversationAccount), string channelId = default(string), string serviceUrl = default(string))
         {
             ActivityId = activityId;
@@ -55,38 +56,39 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets (Optional) ID of the activity to refer to
+        /// Gets or sets (Optional) ID of the activity to refer to.
         /// </summary>
         [JsonProperty(PropertyName = "activityId")]
         public string ActivityId { get; set; }
 
         /// <summary>
-        /// Gets or sets (Optional) User participating in this conversation
+        /// Gets or sets (Optional) User participating in this conversation.
         /// </summary>
         [JsonProperty(PropertyName = "user")]
         public ChannelAccount User { get; set; }
 
         /// <summary>
-        /// Gets or sets bot participating in this conversation
+        /// Gets or sets bot participating in this conversation.
         /// </summary>
         [JsonProperty(PropertyName = "bot")]
         public ChannelAccount Bot { get; set; }
 
         /// <summary>
-        /// Gets or sets conversation reference
+        /// Gets or sets conversation reference.
         /// </summary>
         [JsonProperty(PropertyName = "conversation")]
         public ConversationAccount Conversation { get; set; }
 
         /// <summary>
-        /// Gets or sets channel ID
+        /// Gets or sets an ID that uniquely identifies the channel in the
+        /// conversation that this object references.
         /// </summary>
         [JsonProperty(PropertyName = "channelId")]
         public string ChannelId { get; set; }
 
         /// <summary>
         /// Gets or sets service endpoint where operations concerning the
-        /// referenced conversation may be performed
+        /// referenced conversation may be performed.
         /// </summary>
         [JsonProperty(PropertyName = "serviceUrl")]
         public string ServiceUrl { get; set; }

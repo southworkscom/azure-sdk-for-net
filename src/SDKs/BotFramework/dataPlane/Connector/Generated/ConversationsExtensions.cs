@@ -11,6 +11,8 @@
 namespace Microsoft.Azure.BotFramework.Connector
 {
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -51,12 +53,12 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// The operations group for this extension method.
             /// </param>
             /// <param name='parameters'>
-            /// Parameters to create the conversation from
+            /// Parameters to create the conversation from.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> CreateConversationAsync(this IConversations operations, ConversationParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ConversationResourceResponse> CreateConversationAsync(this IConversations operations, ConversationParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateConversationWithHttpMessagesAsync(parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -70,12 +72,12 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// <remarks>
             /// This method allows you to send an activity to the end of a conversation.
             ///
-            /// This is slightly different from ReplyToActivity().
-            /// * SendToConverstion(conversationId) - will append the activity to the end
-            /// of the conversation according to the timestamp or semantics of the channel.
-            /// * ReplyToActivity(conversationId,ActivityId) - adds the activity as a reply
-            /// to another activity, if the channel supports it. If the channel does not
-            /// support nested replies, ReplyToActivity falls back to SendToConversation.
+            /// This is slightly different from ReplyToActivity.
+            /// * SendToConversation - will append the activity to the end of the
+            /// conversation according to the timestamp or semantics of the channel.
+            /// * ReplyToActivity - adds the activity as a reply to another activity, if
+            /// the channel supports it. If the channel does not support nested replies,
+            /// ReplyToActivity falls back to SendToConversation.
             ///
             /// Use ReplyToActivity when replying to a specific activity in the
             /// conversation.
@@ -85,18 +87,18 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='activity'>
-            /// Activity to send
-            /// </param>
             /// <param name='conversationId'>
-            /// Conversation ID
+            /// Conversation ID.
+            /// </param>
+            /// <param name='activity'>
+            /// Activity to send.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> SendToConversationAsync(this IConversations operations, Activity activity, string conversationId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ResourceResponse> SendToConversationAsync(this IConversations operations, string conversationId, Activity activity, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.SendToConversationWithHttpMessagesAsync(activity, conversationId, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.SendToConversationWithHttpMessagesAsync(conversationId, activity, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -111,25 +113,26 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// Some channels allow you to edit an existing activity to reflect the new
             /// state of a bot conversation.
             ///
-            /// For example, you can remove buttons after someone has clicked "Approve"
-            /// button.
+            /// For example, you might remove buttons from a message in the conversation
+            /// after the user has clicked one of the buttons. If successful, this
+            /// operation updates the specified activity within the specified conversation.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='conversationId'>
-            /// Conversation ID
+            /// Conversation ID.
             /// </param>
             /// <param name='activityId'>
-            /// activityId to update
+            /// Activity Id to update.
             /// </param>
             /// <param name='activity'>
-            /// replacement Activity
+            /// replacement Activity.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> UpdateActivityAsync(this IConversations operations, string conversationId, string activityId, Activity activity, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ResourceResponse> UpdateActivityAsync(this IConversations operations, string conversationId, string activityId, Activity activity, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateActivityWithHttpMessagesAsync(conversationId, activityId, activity, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -144,11 +147,11 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// This method allows you to reply to an activity.
             ///
             /// This is slightly different from SendToConversation().
-            /// * SendToConverstion(conversationId) - will append the activity to the end
-            /// of the conversation according to the timestamp or semantics of the channel.
-            /// * ReplyToActivity(conversationId,ActivityId) - adds the activity as a reply
-            /// to another activity, if the channel supports it. If the channel does not
-            /// support nested replies, ReplyToActivity falls back to SendToConversation.
+            /// * SendToConversation - will append the activity to the end of the
+            /// conversation according to the timestamp or semantics of the channel.
+            /// * ReplyToActivity - adds the activity as a reply to another activity, if
+            /// the channel supports it. If the channel does not support nested replies,
+            /// ReplyToActivity falls back to SendToConversation.
             ///
             /// Use ReplyToActivity when replying to a specific activity in the
             /// conversation.
@@ -159,18 +162,18 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// The operations group for this extension method.
             /// </param>
             /// <param name='conversationId'>
-            /// Conversation ID
+            /// Conversation ID.
             /// </param>
             /// <param name='activityId'>
-            /// activityId the reply is to (OPTIONAL)
+            /// ID of the activity.
             /// </param>
             /// <param name='activity'>
-            /// Activity to send
+            /// Activity to send.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> ReplyToActivityAsync(this IConversations operations, string conversationId, string activityId, Activity activity, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ResourceResponse> ReplyToActivityAsync(this IConversations operations, string conversationId, string activityId, Activity activity, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ReplyToActivityWithHttpMessagesAsync(conversationId, activityId, activity, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -184,48 +187,45 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// <remarks>
             /// Delete an existing activity.
             ///
-            /// Some channels allow you to delete an existing activity, and if successful
-            /// this method will remove the specified activity.
+            /// Some channels allow you to delete an existing activity. If successful, this
+            /// operation removes the specified activity from the specified conversation.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='conversationId'>
-            /// Conversation ID
+            /// Conversation ID.
             /// </param>
             /// <param name='activityId'>
-            /// activityId to delete
+            /// ID of activity to delete.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ErrorResponse> DeleteActivityAsync(this IConversations operations, string conversationId, string activityId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteActivityAsync(this IConversations operations, string conversationId, string activityId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.DeleteActivityWithHttpMessagesAsync(conversationId, activityId, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
+                (await operations.DeleteActivityWithHttpMessagesAsync(conversationId, activityId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
             /// GetConversationMembers
             /// </summary>
             /// <remarks>
-            /// Enumerate the members of a converstion.
+            /// Enumerate the members of a conversation.
             ///
-            /// This REST API takes a ConversationId and returns an array of ChannelAccount
-            /// objects representing the members of the conversation.
+            /// This REST API takes a Conversation ID and returns an array of
+            /// ChannelAccount objects representing the members of the conversation.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='conversationId'>
-            /// Conversation ID
+            /// Conversation ID.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetConversationMembersAsync(this IConversations operations, string conversationId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<ChannelAccount>> GetConversationMembersAsync(this IConversations operations, string conversationId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetConversationMembersWithHttpMessagesAsync(conversationId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -239,23 +239,23 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// <remarks>
             /// Enumerate the members of an activity.
             ///
-            /// This REST API takes a ConversationId and a ActivityId, returning an array
-            /// of ChannelAccount objects representing the members of the particular
+            /// This REST API takes a Conversation ID and an Activity ID, returning an
+            /// array of ChannelAccount objects representing the members of the particular
             /// activity in the conversation.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='conversationId'>
-            /// Conversation ID
+            /// Conversation ID.
             /// </param>
             /// <param name='activityId'>
-            /// Activity ID
+            /// Activity ID.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetActivityMembersAsync(this IConversations operations, string conversationId, string activityId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<ChannelAccount>> GetActivityMembersAsync(this IConversations operations, string conversationId, string activityId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetActivityMembersWithHttpMessagesAsync(conversationId, activityId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -272,22 +272,22 @@ namespace Microsoft.Azure.BotFramework.Connector
             /// This is useful because it allows you to store data in a compliant store
             /// when dealing with enterprises.
             ///
-            /// The response is a ResourceResponse which contains an AttachmentId which is
+            /// The response is a ResourceResponse which contains an Attachment ID which is
             /// suitable for using with the attachments API.
             /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='conversationId'>
-            /// Conversation ID
+            /// Conversation ID.
             /// </param>
             /// <param name='attachmentUpload'>
-            /// Attachment data
+            /// Attachment data.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> UploadAttachmentAsync(this IConversations operations, string conversationId, AttachmentData attachmentUpload, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ResourceResponse> UploadAttachmentAsync(this IConversations operations, string conversationId, AttachmentData attachmentUpload, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UploadAttachmentWithHttpMessagesAsync(conversationId, attachmentUpload, null, cancellationToken).ConfigureAwait(false))
                 {

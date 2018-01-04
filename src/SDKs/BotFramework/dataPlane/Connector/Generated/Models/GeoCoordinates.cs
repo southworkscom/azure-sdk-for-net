@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// GeoCoordinates (entity type: "https://schema.org/GeoCoordinates")
+    /// GeoCoordinates (entity type: "https://schema.org/GeoCoordinates").
     /// </summary>
     public partial class GeoCoordinates
     {
@@ -30,13 +30,14 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the GeoCoordinates class.
         /// </summary>
         /// <param name="elevation">Elevation of the location [WGS
-        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System)</param>
+        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System).</param>
         /// <param name="latitude">Latitude of the location [WGS
-        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System)</param>
+        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System).</param>
         /// <param name="longitude">Longitude of the location [WGS
-        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System)</param>
-        /// <param name="type">The type of the thing</param>
-        /// <param name="name">The name of the thing</param>
+        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System).</param>
+        /// <param name="type">The type of this object. Always set to
+        /// GeoCoordinates.</param>
+        /// <param name="name">Name of the location.</param>
         public GeoCoordinates(double? elevation = default(double?), double? latitude = default(double?), double? longitude = default(double?), string type = default(string), string name = default(string))
         {
             Elevation = elevation;
@@ -54,33 +55,33 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
         /// <summary>
         /// Gets or sets elevation of the location [WGS
-        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System)
+        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System).
         /// </summary>
         [JsonProperty(PropertyName = "elevation")]
         public double? Elevation { get; set; }
 
         /// <summary>
         /// Gets or sets latitude of the location [WGS
-        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System)
+        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System).
         /// </summary>
         [JsonProperty(PropertyName = "latitude")]
         public double? Latitude { get; set; }
 
         /// <summary>
         /// Gets or sets longitude of the location [WGS
-        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System)
+        /// 84](https://en.wikipedia.org/wiki/World_Geodetic_System).
         /// </summary>
         [JsonProperty(PropertyName = "longitude")]
         public double? Longitude { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of the thing
+        /// Gets or sets the type of this object. Always set to GeoCoordinates.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the thing
+        /// Gets or sets name of the location.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

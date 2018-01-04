@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// An attachment within an activity
+    /// An attachment within an activity.
     /// </summary>
     public partial class Attachment
     {
@@ -29,12 +29,15 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the Attachment class.
         /// </summary>
-        /// <param name="contentType">mimetype/Contenttype for the file</param>
-        /// <param name="contentUrl">Content Url</param>
-        /// <param name="content">Embedded content</param>
-        /// <param name="name">(OPTIONAL) The name of the attachment</param>
-        /// <param name="thumbnailUrl">(OPTIONAL) Thumbnail associated with
-        /// attachment</param>
+        /// <param name="contentType">mimetype/Contenttype for the
+        /// file.</param>
+        /// <param name="contentUrl">URL for the content of the attachment.
+        /// Supported protocols are: HTTP, HTTPS, File, and Data.</param>
+        /// <param name="content">Embedded content.</param>
+        /// <param name="name">(OPTIONAL) The name of the attachment.</param>
+        /// <param name="thumbnailUrl">(OPTIONAL) URL to a thumbnail image that
+        /// the channel can use if it supports using an alternative, smaller
+        /// form of content or contentUrl.</param>
         public Attachment(string contentType = default(string), string contentUrl = default(string), object content = default(object), string name = default(string), string thumbnailUrl = default(string))
         {
             ContentType = contentType;
@@ -51,31 +54,34 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets mimetype/Contenttype for the file
+        /// Gets or sets mimetype/Contenttype for the file.
         /// </summary>
         [JsonProperty(PropertyName = "contentType")]
         public string ContentType { get; set; }
 
         /// <summary>
-        /// Gets or sets content Url
+        /// Gets or sets URL for the content of the attachment. Supported
+        /// protocols are: HTTP, HTTPS, File, and Data.
         /// </summary>
         [JsonProperty(PropertyName = "contentUrl")]
         public string ContentUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets embedded content
+        /// Gets or sets embedded content.
         /// </summary>
         [JsonProperty(PropertyName = "content")]
         public object Content { get; set; }
 
         /// <summary>
-        /// Gets or sets (OPTIONAL) The name of the attachment
+        /// Gets or sets (OPTIONAL) The name of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets (OPTIONAL) Thumbnail associated with attachment
+        /// Gets or sets (OPTIONAL) URL to a thumbnail image that the channel
+        /// can use if it supports using an alternative, smaller form of
+        /// content or contentUrl.
         /// </summary>
         [JsonProperty(PropertyName = "thumbnailUrl")]
         public string ThumbnailUrl { get; set; }

@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Place (entity type: "https://schema.org/Place")
+    /// Place (entity type: "https://schema.org/Place").
     /// </summary>
     public partial class Place
     {
@@ -30,14 +30,14 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the Place class.
         /// </summary>
         /// <param name="address">Address of the place (may be `string` or
-        /// complex object of type `PostalAddress`)</param>
-        /// <param name="geo">Geo coordinates of the place (may be complex
-        /// object of type `GeoCoordinates` or `GeoShape`)</param>
+        /// complex object of type "PostalAddress").</param>
+        /// <param name="geo">A GeoCoordinates object that specifies the
+        /// geographical coordinates of the place.</param>
         /// <param name="hasMap">Map to the place (may be `string` (URL) or
-        /// complex object of type `Map`)</param>
-        /// <param name="type">The type of the thing</param>
-        /// <param name="name">The name of the thing</param>
-        public Place(object address = default(object), object geo = default(object), object hasMap = default(object), string type = default(string), string name = default(string))
+        /// complex object of type "Map").</param>
+        /// <param name="type">This object's type. Always set to Place.</param>
+        /// <param name="name">Name of the place.</param>
+        public Place(object address = default(object), GeoCoordinates geo = default(GeoCoordinates), object hasMap = default(object), string type = default(string), string name = default(string))
         {
             Address = address;
             Geo = geo;
@@ -54,33 +54,33 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
         /// <summary>
         /// Gets or sets address of the place (may be `string` or complex
-        /// object of type `PostalAddress`)
+        /// object of type "PostalAddress").
         /// </summary>
         [JsonProperty(PropertyName = "address")]
         public object Address { get; set; }
 
         /// <summary>
-        /// Gets or sets geo coordinates of the place (may be complex object of
-        /// type `GeoCoordinates` or `GeoShape`)
+        /// Gets or sets a GeoCoordinates object that specifies the
+        /// geographical coordinates of the place.
         /// </summary>
         [JsonProperty(PropertyName = "geo")]
-        public object Geo { get; set; }
+        public GeoCoordinates Geo { get; set; }
 
         /// <summary>
         /// Gets or sets map to the place (may be `string` (URL) or complex
-        /// object of type `Map`)
+        /// object of type "Map").
         /// </summary>
         [JsonProperty(PropertyName = "hasMap")]
         public object HasMap { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of the thing
+        /// Gets or sets this object's type. Always set to Place.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the thing
+        /// Gets or sets name of the place.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

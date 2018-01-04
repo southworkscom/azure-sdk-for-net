@@ -16,24 +16,24 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// A card representing a request to sign in
+    /// A card representing a request to sign in.
     /// </summary>
-    public partial class SigninCard
+    public partial class SignInCard
     {
         /// <summary>
-        /// Initializes a new instance of the SigninCard class.
+        /// Initializes a new instance of the SignInCard class.
         /// </summary>
-        public SigninCard()
+        public SignInCard()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the SigninCard class.
+        /// Initializes a new instance of the SignInCard class.
         /// </summary>
-        /// <param name="text">Text for signin request</param>
-        /// <param name="buttons">Action to use to perform signin</param>
-        public SigninCard(string text = default(string), IList<CardAction> buttons = default(IList<CardAction>))
+        /// <param name="text">Text for signIn request.</param>
+        /// <param name="buttons">Action to use to perform signIn.</param>
+        public SignInCard(string text = default(string), IList<CardAction> buttons = default(IList<CardAction>))
         {
             Text = text;
             Buttons = buttons;
@@ -46,13 +46,13 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets text for signin request
+        /// Gets or sets text for signIn request.
         /// </summary>
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
         /// <summary>
-        /// Gets or sets action to use to perform signin
+        /// Gets or sets action to use to perform signIn.
         /// </summary>
         [JsonProperty(PropertyName = "buttons")]
         public IList<CardAction> Buttons { get; set; }

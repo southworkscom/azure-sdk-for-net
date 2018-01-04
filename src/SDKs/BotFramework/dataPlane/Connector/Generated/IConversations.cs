@@ -53,7 +53,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// ```
         /// </remarks>
         /// <param name='parameters'>
-        /// Parameters to create the conversation from
+        /// Parameters to create the conversation from.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -61,7 +61,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -70,7 +70,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> CreateConversationWithHttpMessagesAsync(ConversationParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ConversationResourceResponse>> CreateConversationWithHttpMessagesAsync(ConversationParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// SendToConversation
         /// </summary>
@@ -78,25 +78,25 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// This method allows you to send an activity to the end of a
         /// conversation.
         ///
-        /// This is slightly different from ReplyToActivity().
-        /// * SendToConverstion(conversationId) - will append the activity to
-        /// the end of the conversation according to the timestamp or semantics
-        /// of the channel.
-        /// * ReplyToActivity(conversationId,ActivityId) - adds the activity as
-        /// a reply to another activity, if the channel supports it. If the
-        /// channel does not support nested replies, ReplyToActivity falls back
-        /// to SendToConversation.
+        /// This is slightly different from ReplyToActivity.
+        /// * SendToConversation - will append the activity to the end of the
+        /// conversation according to the timestamp or semantics of the
+        /// channel.
+        /// * ReplyToActivity - adds the activity as a reply to another
+        /// activity, if the channel supports it. If the channel does not
+        /// support nested replies, ReplyToActivity falls back to
+        /// SendToConversation.
         ///
         /// Use ReplyToActivity when replying to a specific activity in the
         /// conversation.
         ///
         /// Use SendToConversation in all other cases.
         /// </remarks>
-        /// <param name='activity'>
-        /// Activity to send
-        /// </param>
         /// <param name='conversationId'>
-        /// Conversation ID
+        /// Conversation ID.
+        /// </param>
+        /// <param name='activity'>
+        /// Activity to send.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -104,7 +104,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -113,7 +113,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> SendToConversationWithHttpMessagesAsync(Activity activity, string conversationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ResourceResponse>> SendToConversationWithHttpMessagesAsync(string conversationId, Activity activity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// UpdateActivity
         /// </summary>
@@ -123,17 +123,19 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// Some channels allow you to edit an existing activity to reflect the
         /// new state of a bot conversation.
         ///
-        /// For example, you can remove buttons after someone has clicked
-        /// "Approve" button.
+        /// For example, you might remove buttons from a message in the
+        /// conversation after the user has clicked one of the buttons. If
+        /// successful, this operation updates the specified activity within
+        /// the specified conversation.
         /// </remarks>
         /// <param name='conversationId'>
-        /// Conversation ID
+        /// Conversation ID.
         /// </param>
         /// <param name='activityId'>
-        /// activityId to update
+        /// Activity Id to update.
         /// </param>
         /// <param name='activity'>
-        /// replacement Activity
+        /// replacement Activity.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -141,7 +143,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -150,7 +152,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> UpdateActivityWithHttpMessagesAsync(string conversationId, string activityId, Activity activity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ResourceResponse>> UpdateActivityWithHttpMessagesAsync(string conversationId, string activityId, Activity activity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// ReplyToActivity
         /// </summary>
@@ -158,13 +160,13 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// This method allows you to reply to an activity.
         ///
         /// This is slightly different from SendToConversation().
-        /// * SendToConverstion(conversationId) - will append the activity to
-        /// the end of the conversation according to the timestamp or semantics
-        /// of the channel.
-        /// * ReplyToActivity(conversationId,ActivityId) - adds the activity as
-        /// a reply to another activity, if the channel supports it. If the
-        /// channel does not support nested replies, ReplyToActivity falls back
-        /// to SendToConversation.
+        /// * SendToConversation - will append the activity to the end of the
+        /// conversation according to the timestamp or semantics of the
+        /// channel.
+        /// * ReplyToActivity - adds the activity as a reply to another
+        /// activity, if the channel supports it. If the channel does not
+        /// support nested replies, ReplyToActivity falls back to
+        /// SendToConversation.
         ///
         /// Use ReplyToActivity when replying to a specific activity in the
         /// conversation.
@@ -172,13 +174,13 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// Use SendToConversation in all other cases.
         /// </remarks>
         /// <param name='conversationId'>
-        /// Conversation ID
+        /// Conversation ID.
         /// </param>
         /// <param name='activityId'>
-        /// activityId the reply is to (OPTIONAL)
+        /// ID of the activity.
         /// </param>
         /// <param name='activity'>
-        /// Activity to send
+        /// Activity to send.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -186,7 +188,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -195,21 +197,22 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> ReplyToActivityWithHttpMessagesAsync(string conversationId, string activityId, Activity activity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ResourceResponse>> ReplyToActivityWithHttpMessagesAsync(string conversationId, string activityId, Activity activity, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// DeleteActivity
         /// </summary>
         /// <remarks>
         /// Delete an existing activity.
         ///
-        /// Some channels allow you to delete an existing activity, and if
-        /// successful this method will remove the specified activity.
+        /// Some channels allow you to delete an existing activity. If
+        /// successful, this operation removes the specified activity from the
+        /// specified conversation.
         /// </remarks>
         /// <param name='conversationId'>
-        /// Conversation ID
+        /// Conversation ID.
         /// </param>
         /// <param name='activityId'>
-        /// activityId to delete
+        /// ID of activity to delete.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -217,28 +220,25 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
         /// </exception>
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<ErrorResponse>> DeleteActivityWithHttpMessagesAsync(string conversationId, string activityId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteActivityWithHttpMessagesAsync(string conversationId, string activityId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// GetConversationMembers
         /// </summary>
         /// <remarks>
-        /// Enumerate the members of a converstion.
+        /// Enumerate the members of a conversation.
         ///
-        /// This REST API takes a ConversationId and returns an array of
+        /// This REST API takes a Conversation ID and returns an array of
         /// ChannelAccount objects representing the members of the
         /// conversation.
         /// </remarks>
         /// <param name='conversationId'>
-        /// Conversation ID
+        /// Conversation ID.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -246,7 +246,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -255,22 +255,22 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> GetConversationMembersWithHttpMessagesAsync(string conversationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<ChannelAccount>>> GetConversationMembersWithHttpMessagesAsync(string conversationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// GetActivityMembers
         /// </summary>
         /// <remarks>
         /// Enumerate the members of an activity.
         ///
-        /// This REST API takes a ConversationId and a ActivityId, returning an
-        /// array of ChannelAccount objects representing the members of the
+        /// This REST API takes a Conversation ID and an Activity ID, returning
+        /// an array of ChannelAccount objects representing the members of the
         /// particular activity in the conversation.
         /// </remarks>
         /// <param name='conversationId'>
-        /// Conversation ID
+        /// Conversation ID.
         /// </param>
         /// <param name='activityId'>
-        /// Activity ID
+        /// Activity ID.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -278,7 +278,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -287,7 +287,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> GetActivityMembersWithHttpMessagesAsync(string conversationId, string activityId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<IList<ChannelAccount>>> GetActivityMembersWithHttpMessagesAsync(string conversationId, string activityId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// UploadAttachment
         /// </summary>
@@ -297,14 +297,14 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// This is useful because it allows you to store data in a compliant
         /// store when dealing with enterprises.
         ///
-        /// The response is a ResourceResponse which contains an AttachmentId
+        /// The response is a ResourceResponse which contains an Attachment ID
         /// which is suitable for using with the attachments API.
         /// </remarks>
         /// <param name='conversationId'>
-        /// Conversation ID
+        /// Conversation ID.
         /// </param>
         /// <param name='attachmentUpload'>
-        /// Attachment data
+        /// Attachment data.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -312,7 +312,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -321,6 +321,6 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> UploadAttachmentWithHttpMessagesAsync(string conversationId, AttachmentData attachmentUpload, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<ResourceResponse>> UploadAttachmentWithHttpMessagesAsync(string conversationId, AttachmentData attachmentUpload, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -10,11 +10,12 @@
 
 namespace Microsoft.Azure.BotFramework.Connector.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
-    /// Attachment data
+    /// Attachment data.
     /// </summary>
     public partial class AttachmentData
     {
@@ -29,11 +30,11 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the AttachmentData class.
         /// </summary>
-        /// <param name="type">Content-Type of the attachment</param>
-        /// <param name="name">Name of the attachment</param>
-        /// <param name="originalBase64">Attachment content</param>
-        /// <param name="thumbnailBase64">Attachment thumbnail</param>
-        public AttachmentData(string type = default(string), string name = default(string), byte[] originalBase64 = default(byte[]), byte[] thumbnailBase64 = default(byte[]))
+        /// <param name="type">Content-Type of the attachment.</param>
+        /// <param name="originalBase64">Attachment content.</param>
+        /// <param name="name">Name of the attachment.</param>
+        /// <param name="thumbnailBase64">Attachment thumbnail.</param>
+        public AttachmentData(string type, byte[] originalBase64, string name = default(string), byte[] thumbnailBase64 = default(byte[]))
         {
             Type = type;
             Name = name;
@@ -48,28 +49,45 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets content-Type of the attachment
+        /// Gets or sets content-Type of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the attachment
+        /// Gets or sets name of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets attachment content
+        /// Gets or sets attachment content.
         /// </summary>
         [JsonProperty(PropertyName = "originalBase64")]
         public byte[] OriginalBase64 { get; set; }
 
         /// <summary>
-        /// Gets or sets attachment thumbnail
+        /// Gets or sets attachment thumbnail.
         /// </summary>
         [JsonProperty(PropertyName = "thumbnailBase64")]
         public byte[] ThumbnailBase64 { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (Type == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Type");
+            }
+            if (OriginalBase64 == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "OriginalBase64");
+            }
+        }
     }
 }

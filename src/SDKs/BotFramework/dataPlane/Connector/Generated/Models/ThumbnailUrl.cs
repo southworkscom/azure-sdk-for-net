@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Object describing a media thumbnail
+    /// Object describing a media thumbnail.
     /// </summary>
     public partial class ThumbnailUrl
     {
@@ -29,10 +29,10 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the ThumbnailUrl class.
         /// </summary>
-        /// <param name="url">url pointing to an thumbnail to use for media
-        /// content</param>
+        /// <param name="url">URL pointing to an thumbnail to use for media
+        /// content.</param>
         /// <param name="alt">Alt text to display for screen readers on the
-        /// thumbnail image</param>
+        /// thumbnail image.</param>
         public ThumbnailUrl(string url = default(string), string alt = default(string))
         {
             Url = url;
@@ -46,14 +46,14 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets url pointing to an thumbnail to use for media content
+        /// Gets or sets URL pointing to an thumbnail to use for media content.
         /// </summary>
         [JsonProperty(PropertyName = "url")]
         public string Url { get; set; }
 
         /// <summary>
         /// Gets or sets alt text to display for screen readers on the
-        /// thumbnail image
+        /// thumbnail image.
         /// </summary>
         [JsonProperty(PropertyName = "alt")]
         public string Alt { get; set; }

@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Channel account information for a conversation
+    /// Channel account information for a conversation.
     /// </summary>
     public partial class ConversationAccount
     {
@@ -29,10 +29,14 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the ConversationAccount class.
         /// </summary>
-        /// <param name="isGroup">Is this a reference to a group</param>
-        /// <param name="id">Channel id for the user or bot on this channel
-        /// (Example: joe@smith.com, or @joesmith or 123456)</param>
-        /// <param name="name">Display friendly name</param>
+        /// <param name="isGroup">Is this a reference to a group.</param>
+        /// <param name="id">The ID that identifies the conversation. The ID is
+        /// unique per channel. If the channel starts the conversion, it sets
+        /// this ID; otherwise, the bot sets this property to the ID that it
+        /// gets back in the response when it starts the conversation (Example:
+        /// joe@smith.com, or @joesmith or 123456).</param>
+        /// <param name="name">A display name that can be used to identify the
+        /// conversation.</param>
         public ConversationAccount(bool? isGroup = default(bool?), string id = default(string), string name = default(string))
         {
             IsGroup = isGroup;
@@ -47,20 +51,24 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets is this a reference to a group
+        /// Gets or sets is this a reference to a group.
         /// </summary>
         [JsonProperty(PropertyName = "isGroup")]
         public bool? IsGroup { get; set; }
 
         /// <summary>
-        /// Gets or sets channel id for the user or bot on this channel
-        /// (Example: joe@smith.com, or @joesmith or 123456)
+        /// Gets or sets the ID that identifies the conversation. The ID is
+        /// unique per channel. If the channel starts the conversion, it sets
+        /// this ID; otherwise, the bot sets this property to the ID that it
+        /// gets back in the response when it starts the conversation (Example:
+        /// joe@smith.com, or @joesmith or 123456).
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets display friendly name
+        /// Gets or sets a display name that can be used to identify the
+        /// conversation.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

@@ -16,7 +16,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// SuggestedActions that can be performed
+    /// SuggestedActions that can be performed.
     /// </summary>
     public partial class SuggestedActions
     {
@@ -32,9 +32,10 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the SuggestedActions class.
         /// </summary>
         /// <param name="to">Ids of the recipients that the actions should be
-        /// shown to.  These Ids are relative to the channelId and a subset of
-        /// all recipients of the activity</param>
-        /// <param name="actions">Actions that can be shown to the user</param>
+        /// shown to. These Ids are relative to the channelId and a subset of
+        /// all recipients of the activity.</param>
+        /// <param name="actions">Actions that can be shown to the
+        /// user.</param>
         public SuggestedActions(IList<string> to = default(IList<string>), IList<CardAction> actions = default(IList<CardAction>))
         {
             To = to;
@@ -49,14 +50,14 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
         /// <summary>
         /// Gets or sets ids of the recipients that the actions should be shown
-        /// to.  These Ids are relative to the channelId and a subset of all
-        /// recipients of the activity
+        /// to. These Ids are relative to the channelId and a subset of all
+        /// recipients of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "to")]
         public IList<string> To { get; set; }
 
         /// <summary>
-        /// Gets or sets actions that can be shown to the user
+        /// Gets or sets actions that can be shown to the user.
         /// </summary>
         [JsonProperty(PropertyName = "actions")]
         public IList<CardAction> Actions { get; set; }

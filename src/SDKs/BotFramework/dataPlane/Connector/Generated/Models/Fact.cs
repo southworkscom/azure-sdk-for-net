@@ -15,9 +15,9 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
     /// <summary>
     /// Set of key-value pairs. Advantage of this section is that key and value
-    /// properties will be
-    /// rendered with default style information with some delimiter between
-    /// them. So there is no need for developer to specify style information.
+    /// properties will be rendered with default style information with some
+    /// delimiter between them. So there is no need for developer to specify
+    /// style information.
     /// </summary>
     public partial class Fact
     {
@@ -32,8 +32,8 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the Fact class.
         /// </summary>
-        /// <param name="key">The key for this Fact</param>
-        /// <param name="value">The value for this Fact</param>
+        /// <param name="key">Name of the fact.</param>
+        /// <param name="value">Value of the fact.</param>
         public Fact(string key = default(string), string value = default(string))
         {
             Key = key;
@@ -47,13 +47,13 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the key for this Fact
+        /// Gets or sets name of the fact.
         /// </summary>
         [JsonProperty(PropertyName = "key")]
         public string Key { get; set; }
 
         /// <summary>
-        /// Gets or sets the value for this Fact
+        /// Gets or sets value of the fact.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }

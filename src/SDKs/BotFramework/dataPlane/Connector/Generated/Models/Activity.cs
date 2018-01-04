@@ -10,6 +10,7 @@
 
 namespace Microsoft.Azure.BotFramework.Connector.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
     /// <summary>
     /// An Activity is the basic communication type for the Bot Framework 3.0
-    /// protocol
+    /// protocol.
     /// </summary>
     public partial class Activity
     {
@@ -32,62 +33,76 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the Activity class.
         /// </summary>
-        /// <param name="type">The type of the activity
-        /// [message|contactRelationUpdate|converationUpdate|typing|endOfConversation|event|invoke]</param>
-        /// <param name="id">ID of this activity</param>
-        /// <param name="timestamp">UTC Time when message was sent (set by
-        /// service)</param>
-        /// <param name="localTimestamp">Local time when message was sent (set
-        /// by client, Ex: 2016-09-23T13:07:49.4714686-07:00)</param>
-        /// <param name="serviceUrl">Service endpoint where operations
-        /// concerning the activity may be performed</param>
-        /// <param name="channelId">ID of the channel where the activity was
-        /// sent</param>
-        /// <param name="fromProperty">Sender address</param>
-        /// <param name="conversation">Conversation</param>
+        /// <param name="type">The type of the activity. Possible values
+        /// include: 'message', 'conversationUpdate', 'contactRelationUpdate',
+        /// 'typing', 'endOfConversation', 'event', 'invoke'</param>
+        /// <param name="fromProperty">Sender address.</param>
         /// <param name="recipient">(Outbound to bot only) Bot's address that
-        /// received the message</param>
-        /// <param name="textFormat">Format of text fields [plain|markdown]
-        /// Default:markdown</param>
+        /// received the message.</param>
+        /// <param name="id">ID that uniquely identifies the activity on the
+        /// channel.</param>
+        /// <param name="timestamp">Date and time that the message was sent in
+        /// the UTC time zone (set by service).</param>
+        /// <param name="localTimestamp">Date and time that the message was
+        /// sent in the local time zone (set by client).</param>
+        /// <param name="serviceUrl">Service endpoint where operations
+        /// concerning the activity may be performed.</param>
+        /// <param name="channelId">ID of the channel where the activity was
+        /// sent.</param>
+        /// <param name="conversation">Channel account information.</param>
+        /// <param name="textFormat">Format of text fields. Default: markdown.
+        /// Possible values include: 'markdown', 'plain', 'xml'</param>
         /// <param name="attachmentLayout">Hint for how to deal with multiple
-        /// attachments: [list|carousel] Default:list</param>
-        /// <param name="membersAdded">Members added to the
-        /// conversation</param>
-        /// <param name="membersRemoved">Members removed from the
-        /// conversation</param>
+        /// attachments: [list|carousel] Default: list. Possible values
+        /// include: 'list', 'carousel'</param>
+        /// <param name="membersAdded">Members added to the conversation.
+        /// Present only if activity type is "conversationUpdate" and users
+        /// joined the conversation.</param>
+        /// <param name="membersRemoved">Members removed from the conversation.
+        /// Present only if activity type is "conversationUpdate" and users
+        /// joined the conversation.</param>
         /// <param name="reactionsAdded">Reactions added to the
-        /// activity</param>
+        /// activity.</param>
         /// <param name="reactionsRemoved">Reactions removed from the
-        /// activity</param>
+        /// activity.</param>
         /// <param name="topicName">The conversation's updated topic
-        /// name</param>
+        /// name.</param>
         /// <param name="historyDisclosed">True if prior history of the channel
-        /// is disclosed</param>
-        /// <param name="locale">The language code of the Text field</param>
-        /// <param name="text">Content for the message</param>
-        /// <param name="speak">SSML Speak for TTS audio response</param>
-        /// <param name="inputHint">Indicates whether the bot is accepting,
-        /// expecting, or ignoring input</param>
+        /// is disclosed. Default value is false.</param>
+        /// <param name="locale">Locale of the language that should be used to
+        /// display text within the message.</param>
+        /// <param name="text">Content for the message.</param>
+        /// <param name="speak">SSML Speak for TTS audio response.</param>
+        /// <param name="inputHint">Value that indicates whether your bot is
+        /// accepting, expecting, or ignoring user input after the message is
+        /// delivered to the client. Possible values include: 'acceptingInput',
+        /// 'expectingInput', 'ignoringInput'</param>
         /// <param name="summary">Text to display if the channel cannot render
-        /// cards</param>
+        /// cards.</param>
         /// <param name="suggestedActions">SuggestedActions are used to provide
-        /// keyboard/quickreply like behavior in many clients</param>
-        /// <param name="attachments">Attachments</param>
+        /// keyboard/quick-reply like behavior in many clients.</param>
+        /// <param name="attachments">List of Attachments.</param>
         /// <param name="entities">Collection of Entity objects, each of which
         /// contains metadata about this activity. Each Entity object is
         /// typed.</param>
-        /// <param name="channelData">Channel-specific payload</param>
-        /// <param name="action">ContactAdded/Removed action</param>
+        /// <param name="channelData">Channel-specific payload.</param>
+        /// <param name="action">The action to apply or that was applied.
+        ///
+        /// Use the type property to determine context for the action. For
+        /// example, if type is contactRelationUpdate, the value of the action
+        /// property would be add if the user added your bot to their contacts
+        /// list, or remove if they removed your bot from their contacts
+        /// list.</param>
         /// <param name="replyToId">The original ID this message is a response
-        /// to</param>
-        /// <param name="value">Open-ended value</param>
+        /// to.</param>
+        /// <param name="value">Open-ended value.</param>
         /// <param name="name">Name of the operation to invoke or the name of
-        /// the event</param>
+        /// the event.</param>
         /// <param name="relatesTo">Reference to another conversation or
-        /// activity</param>
+        /// activity.</param>
         /// <param name="code">Code indicating why the conversation has
-        /// ended</param>
-        public Activity(string type = default(string), string id = default(string), System.DateTime? timestamp = default(System.DateTime?), System.DateTime? localTimestamp = default(System.DateTime?), string serviceUrl = default(string), string channelId = default(string), ChannelAccount fromProperty = default(ChannelAccount), ConversationAccount conversation = default(ConversationAccount), ChannelAccount recipient = default(ChannelAccount), string textFormat = default(string), string attachmentLayout = default(string), IList<ChannelAccount> membersAdded = default(IList<ChannelAccount>), IList<ChannelAccount> membersRemoved = default(IList<ChannelAccount>), IList<MessageReaction> reactionsAdded = default(IList<MessageReaction>), IList<MessageReaction> reactionsRemoved = default(IList<MessageReaction>), string topicName = default(string), bool? historyDisclosed = default(bool?), string locale = default(string), string text = default(string), string speak = default(string), string inputHint = default(string), string summary = default(string), SuggestedActions suggestedActions = default(SuggestedActions), IList<Attachment> attachments = default(IList<Attachment>), IList<Entity> entities = default(IList<Entity>), object channelData = default(object), string action = default(string), string replyToId = default(string), object value = default(object), string name = default(string), ConversationReference relatesTo = default(ConversationReference), string code = default(string))
+        /// ended.</param>
+        public Activity(ActivityType type, ChannelAccount fromProperty, ChannelAccount recipient, string id = default(string), System.DateTime? timestamp = default(System.DateTime?), System.DateTime? localTimestamp = default(System.DateTime?), string serviceUrl = default(string), string channelId = default(string), ConversationAccount conversation = default(ConversationAccount), TextFormat? textFormat = default(TextFormat?), AttachmentLayout? attachmentLayout = default(AttachmentLayout?), IList<ChannelAccount> membersAdded = default(IList<ChannelAccount>), IList<ChannelAccount> membersRemoved = default(IList<ChannelAccount>), IList<MessageReaction> reactionsAdded = default(IList<MessageReaction>), IList<MessageReaction> reactionsRemoved = default(IList<MessageReaction>), string topicName = default(string), bool? historyDisclosed = default(bool?), string locale = default(string), string text = default(string), string speak = default(string), InputHint? inputHint = default(InputHint?), string summary = default(string), SuggestedActions suggestedActions = default(SuggestedActions), IList<Attachment> attachments = default(IList<Attachment>), IList<Entity> entities = default(IList<Entity>), object channelData = default(object), string action = default(string), string replyToId = default(string), object value = default(object), string name = default(string), ConversationReference relatesTo = default(ConversationReference), string code = default(string))
         {
             Type = type;
             Id = id;
@@ -130,153 +145,165 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the type of the activity
-        /// [message|contactRelationUpdate|converationUpdate|typing|endOfConversation|event|invoke]
+        /// Gets or sets the type of the activity. Possible values include:
+        /// 'message', 'conversationUpdate', 'contactRelationUpdate', 'typing',
+        /// 'endOfConversation', 'event', 'invoke'
         /// </summary>
         [JsonProperty(PropertyName = "type")]
-        public string Type { get; set; }
+        public ActivityType Type { get; set; }
 
         /// <summary>
-        /// Gets or sets ID of this activity
+        /// Gets or sets ID that uniquely identifies the activity on the
+        /// channel.
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets UTC Time when message was sent (set by service)
+        /// Gets or sets date and time that the message was sent in the UTC
+        /// time zone (set by service).
         /// </summary>
         [JsonProperty(PropertyName = "timestamp")]
         public System.DateTime? Timestamp { get; set; }
 
         /// <summary>
-        /// Gets or sets local time when message was sent (set by client, Ex:
-        /// 2016-09-23T13:07:49.4714686-07:00)
+        /// Gets or sets date and time that the message was sent in the local
+        /// time zone (set by client).
         /// </summary>
         [JsonProperty(PropertyName = "localTimestamp")]
         public System.DateTime? LocalTimestamp { get; set; }
 
         /// <summary>
         /// Gets or sets service endpoint where operations concerning the
-        /// activity may be performed
+        /// activity may be performed.
         /// </summary>
         [JsonProperty(PropertyName = "serviceUrl")]
         public string ServiceUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets ID of the channel where the activity was sent
+        /// Gets or sets ID of the channel where the activity was sent.
         /// </summary>
         [JsonProperty(PropertyName = "channelId")]
         public string ChannelId { get; set; }
 
         /// <summary>
-        /// Gets or sets sender address
+        /// Gets or sets sender address.
         /// </summary>
         [JsonProperty(PropertyName = "from")]
         public ChannelAccount FromProperty { get; set; }
 
         /// <summary>
-        /// Gets or sets conversation
+        /// Gets or sets channel account information.
         /// </summary>
         [JsonProperty(PropertyName = "conversation")]
         public ConversationAccount Conversation { get; set; }
 
         /// <summary>
         /// Gets or sets (Outbound to bot only) Bot's address that received the
-        /// message
+        /// message.
         /// </summary>
         [JsonProperty(PropertyName = "recipient")]
         public ChannelAccount Recipient { get; set; }
 
         /// <summary>
-        /// Gets or sets format of text fields [plain|markdown]
-        /// Default:markdown
+        /// Gets or sets format of text fields. Default: markdown. Possible
+        /// values include: 'markdown', 'plain', 'xml'
         /// </summary>
         [JsonProperty(PropertyName = "textFormat")]
-        public string TextFormat { get; set; }
+        public TextFormat? TextFormat { get; set; }
 
         /// <summary>
         /// Gets or sets hint for how to deal with multiple attachments:
-        /// [list|carousel] Default:list
+        /// [list|carousel] Default: list. Possible values include: 'list',
+        /// 'carousel'
         /// </summary>
         [JsonProperty(PropertyName = "attachmentLayout")]
-        public string AttachmentLayout { get; set; }
+        public AttachmentLayout? AttachmentLayout { get; set; }
 
         /// <summary>
-        /// Gets or sets members added to the conversation
+        /// Gets or sets members added to the conversation. Present only if
+        /// activity type is "conversationUpdate" and users joined the
+        /// conversation.
         /// </summary>
         [JsonProperty(PropertyName = "membersAdded")]
         public IList<ChannelAccount> MembersAdded { get; set; }
 
         /// <summary>
-        /// Gets or sets members removed from the conversation
+        /// Gets or sets members removed from the conversation. Present only if
+        /// activity type is "conversationUpdate" and users joined the
+        /// conversation.
         /// </summary>
         [JsonProperty(PropertyName = "membersRemoved")]
         public IList<ChannelAccount> MembersRemoved { get; set; }
 
         /// <summary>
-        /// Gets or sets reactions added to the activity
+        /// Gets or sets reactions added to the activity.
         /// </summary>
         [JsonProperty(PropertyName = "reactionsAdded")]
         public IList<MessageReaction> ReactionsAdded { get; set; }
 
         /// <summary>
-        /// Gets or sets reactions removed from the activity
+        /// Gets or sets reactions removed from the activity.
         /// </summary>
         [JsonProperty(PropertyName = "reactionsRemoved")]
         public IList<MessageReaction> ReactionsRemoved { get; set; }
 
         /// <summary>
-        /// Gets or sets the conversation's updated topic name
+        /// Gets or sets the conversation's updated topic name.
         /// </summary>
         [JsonProperty(PropertyName = "topicName")]
         public string TopicName { get; set; }
 
         /// <summary>
-        /// Gets or sets true if prior history of the channel is disclosed
+        /// Gets or sets true if prior history of the channel is disclosed.
+        /// Default value is false.
         /// </summary>
         [JsonProperty(PropertyName = "historyDisclosed")]
         public bool? HistoryDisclosed { get; set; }
 
         /// <summary>
-        /// Gets or sets the language code of the Text field
+        /// Gets or sets locale of the language that should be used to display
+        /// text within the message.
         /// </summary>
         [JsonProperty(PropertyName = "locale")]
         public string Locale { get; set; }
 
         /// <summary>
-        /// Gets or sets content for the message
+        /// Gets or sets content for the message.
         /// </summary>
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
         /// <summary>
-        /// Gets or sets SSML Speak for TTS audio response
+        /// Gets or sets SSML Speak for TTS audio response.
         /// </summary>
         [JsonProperty(PropertyName = "speak")]
         public string Speak { get; set; }
 
         /// <summary>
-        /// Gets or sets indicates whether the bot is accepting, expecting, or
-        /// ignoring input
+        /// Gets or sets value that indicates whether your bot is accepting,
+        /// expecting, or ignoring user input after the message is delivered to
+        /// the client. Possible values include: 'acceptingInput',
+        /// 'expectingInput', 'ignoringInput'
         /// </summary>
         [JsonProperty(PropertyName = "inputHint")]
-        public string InputHint { get; set; }
+        public InputHint? InputHint { get; set; }
 
         /// <summary>
-        /// Gets or sets text to display if the channel cannot render cards
+        /// Gets or sets text to display if the channel cannot render cards.
         /// </summary>
         [JsonProperty(PropertyName = "summary")]
         public string Summary { get; set; }
 
         /// <summary>
         /// Gets or sets suggestedActions are used to provide
-        /// keyboard/quickreply like behavior in many clients
+        /// keyboard/quick-reply like behavior in many clients.
         /// </summary>
         [JsonProperty(PropertyName = "suggestedActions")]
         public SuggestedActions SuggestedActions { get; set; }
 
         /// <summary>
-        /// Gets or sets attachments
+        /// Gets or sets list of Attachments.
         /// </summary>
         [JsonProperty(PropertyName = "attachments")]
         public IList<Attachment> Attachments { get; set; }
@@ -289,47 +316,69 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         public IList<Entity> Entities { get; set; }
 
         /// <summary>
-        /// Gets or sets channel-specific payload
+        /// Gets or sets channel-specific payload.
         /// </summary>
         [JsonProperty(PropertyName = "channelData")]
         public object ChannelData { get; set; }
 
         /// <summary>
-        /// Gets or sets contactAdded/Removed action
+        /// Gets or sets the action to apply or that was applied.
+        ///
+        /// Use the type property to determine context for the action. For
+        /// example, if type is contactRelationUpdate, the value of the action
+        /// property would be add if the user added your bot to their contacts
+        /// list, or remove if they removed your bot from their contacts list.
         /// </summary>
         [JsonProperty(PropertyName = "action")]
         public string Action { get; set; }
 
         /// <summary>
-        /// Gets or sets the original ID this message is a response to
+        /// Gets or sets the original ID this message is a response to.
         /// </summary>
         [JsonProperty(PropertyName = "replyToId")]
         public string ReplyToId { get; set; }
 
         /// <summary>
-        /// Gets or sets open-ended value
+        /// Gets or sets open-ended value.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public object Value { get; set; }
 
         /// <summary>
         /// Gets or sets name of the operation to invoke or the name of the
-        /// event
+        /// event.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets reference to another conversation or activity
+        /// Gets or sets reference to another conversation or activity.
         /// </summary>
         [JsonProperty(PropertyName = "relatesTo")]
         public ConversationReference RelatesTo { get; set; }
 
         /// <summary>
-        /// Gets or sets code indicating why the conversation has ended
+        /// Gets or sets code indicating why the conversation has ended.
         /// </summary>
         [JsonProperty(PropertyName = "code")]
         public string Code { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (FromProperty == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "FromProperty");
+            }
+            if (Recipient == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Recipient");
+            }
+        }
     }
 }

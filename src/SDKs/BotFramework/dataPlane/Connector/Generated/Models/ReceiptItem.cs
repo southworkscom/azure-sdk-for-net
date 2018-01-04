@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// An item on a receipt card
+    /// An item on a receipt card.
     /// </summary>
     public partial class ReceiptItem
     {
@@ -29,14 +29,16 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the ReceiptItem class.
         /// </summary>
-        /// <param name="title">Title of the Card</param>
-        /// <param name="subtitle">Subtitle appears just below Title field,
-        /// differs from Title in font styling only</param>
-        /// <param name="text">Text field appears just below subtitle, differs
-        /// from Subtitle in font styling only</param>
-        /// <param name="image">Image</param>
-        /// <param name="price">Amount with currency</param>
-        /// <param name="quantity">Number of items of given kind</param>
+        /// <param name="title">Title of the line item.</param>
+        /// <param name="subtitle">Subtitle to be displayed under the line
+        /// item’s title.</param>
+        /// <param name="text">Description of the line item.</param>
+        /// <param name="image">Thumbnail image to display next to the line
+        /// item.</param>
+        /// <param name="price">A currency-formatted string that specifies the
+        /// total price of all units purchased.</param>
+        /// <param name="quantity">A numeric string that specifies the number
+        /// of units purchased.</param>
         /// <param name="tap">This action will be activated when user taps on
         /// the Item bubble.</param>
         public ReceiptItem(string title = default(string), string subtitle = default(string), string text = default(string), CardImage image = default(CardImage), string price = default(string), string quantity = default(string), CardAction tap = default(CardAction))
@@ -57,39 +59,39 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets title of the Card
+        /// Gets or sets title of the line item.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets subtitle appears just below Title field, differs from
-        /// Title in font styling only
+        /// Gets or sets subtitle to be displayed under the line item’s title.
         /// </summary>
         [JsonProperty(PropertyName = "subtitle")]
         public string Subtitle { get; set; }
 
         /// <summary>
-        /// Gets or sets text field appears just below subtitle, differs from
-        /// Subtitle in font styling only
+        /// Gets or sets description of the line item.
         /// </summary>
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
         /// <summary>
-        /// Gets or sets image
+        /// Gets or sets thumbnail image to display next to the line item.
         /// </summary>
         [JsonProperty(PropertyName = "image")]
         public CardImage Image { get; set; }
 
         /// <summary>
-        /// Gets or sets amount with currency
+        /// Gets or sets a currency-formatted string that specifies the total
+        /// price of all units purchased.
         /// </summary>
         [JsonProperty(PropertyName = "price")]
         public string Price { get; set; }
 
         /// <summary>
-        /// Gets or sets number of items of given kind
+        /// Gets or sets a numeric string that specifies the number of units
+        /// purchased.
         /// </summary>
         [JsonProperty(PropertyName = "quantity")]
         public string Quantity { get; set; }

@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Supplementary parameter for media events
+    /// Supplementary parameter for media events.
     /// </summary>
     public partial class MediaEventValue
     {
@@ -30,7 +30,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the MediaEventValue class.
         /// </summary>
         /// <param name="cardValue">Callback parameter specified in the Value
-        /// field of the MediaCard that originated this event</param>
+        /// field of the MediaCard that originated this event.</param>
         public MediaEventValue(object cardValue = default(object))
         {
             CardValue = cardValue;
@@ -44,7 +44,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
         /// <summary>
         /// Gets or sets callback parameter specified in the Value field of the
-        /// MediaCard that originated this event
+        /// MediaCard that originated this event.
         /// </summary>
         [JsonProperty(PropertyName = "cardValue")]
         public object CardValue { get; set; }

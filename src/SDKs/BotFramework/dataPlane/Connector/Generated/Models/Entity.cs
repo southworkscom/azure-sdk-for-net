@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Object of schema.org types
+    /// Object of schema.org types.
     /// </summary>
     public partial class Entity
     {
@@ -30,7 +30,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the Entity class.
         /// </summary>
         /// <param name="type">Entity Type (typically from schema.org
-        /// types)</param>
+        /// types).</param>
         public Entity(string type = default(string))
         {
             Type = type;
@@ -43,7 +43,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets entity Type (typically from schema.org types)
+        /// Gets or sets entity Type (typically from schema.org types).
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }

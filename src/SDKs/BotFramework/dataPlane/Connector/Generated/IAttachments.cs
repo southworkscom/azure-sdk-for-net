@@ -26,10 +26,11 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// GetAttachmentInfo
         /// </summary>
         /// <remarks>
-        /// Get AttachmentInfo structure describing the attachment views
+        /// Gets information about the specified attachment, including file
+        /// name, type, and the available views (e.g., original or thumbnail).
         /// </remarks>
         /// <param name='attachmentId'>
-        /// attachment id
+        /// Attachment ID.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -37,7 +38,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="ErrorResponseException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -46,18 +47,19 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> GetAttachmentInfoWithHttpMessagesAsync(string attachmentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<AttachmentInfo>> GetAttachmentInfoWithHttpMessagesAsync(string attachmentId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// GetAttachment
         /// </summary>
         /// <remarks>
-        /// Get the named view as binary content
+        /// Gets the specified view of the specified attachment as binary
+        /// content.
         /// </remarks>
         /// <param name='attachmentId'>
-        /// attachment id
+        /// Attachment ID.
         /// </param>
         /// <param name='viewId'>
-        /// View id from attachmentInfo
+        /// View ID from attachmentInfo
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -74,6 +76,6 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<object>> GetAttachmentWithHttpMessagesAsync(string attachmentId, string viewId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<byte[]>> GetAttachmentWithHttpMessagesAsync(string attachmentId, string viewId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

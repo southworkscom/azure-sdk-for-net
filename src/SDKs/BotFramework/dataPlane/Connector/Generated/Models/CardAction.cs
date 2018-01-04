@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// A clickable action
+    /// A clickable action.
     /// </summary>
     public partial class CardAction
     {
@@ -30,16 +30,16 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the CardAction class.
         /// </summary>
         /// <param name="type">The type of action implemented by this
-        /// button</param>
+        /// button.</param>
         /// <param name="title">Text description which appears on the
-        /// button</param>
+        /// button.</param>
         /// <param name="image">Image URL which will appear on the button, next
-        /// to text label</param>
-        /// <param name="text">Text for this action</param>
+        /// to text label.</param>
+        /// <param name="text">Text for this action.</param>
         /// <param name="displayText">(Optional) text to display in the chat
-        /// feed if the button is clicked</param>
+        /// feed if the button is clicked.</param>
         /// <param name="value">Supplementary parameter for action. Content of
-        /// this property depends on the ActionType</param>
+        /// this property depends on the ActionType.</param>
         public CardAction(string type = default(string), string title = default(string), string image = default(string), string text = default(string), string displayText = default(string), object value = default(object))
         {
             Type = type;
@@ -57,40 +57,40 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the type of action implemented by this button
+        /// Gets or sets the type of action implemented by this button.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or sets text description which appears on the button
+        /// Gets or sets text description which appears on the button.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets image URL which will appear on the button, next to
-        /// text label
+        /// text label.
         /// </summary>
         [JsonProperty(PropertyName = "image")]
         public string Image { get; set; }
 
         /// <summary>
-        /// Gets or sets text for this action
+        /// Gets or sets text for this action.
         /// </summary>
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
         /// <summary>
         /// Gets or sets (Optional) text to display in the chat feed if the
-        /// button is clicked
+        /// button is clicked.
         /// </summary>
         [JsonProperty(PropertyName = "displayText")]
         public string DisplayText { get; set; }
 
         /// <summary>
         /// Gets or sets supplementary parameter for action. Content of this
-        /// property depends on the ActionType
+        /// property depends on the ActionType.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public object Value { get; set; }

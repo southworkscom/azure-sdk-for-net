@@ -14,7 +14,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// Object representing error information
+    /// Object representing error information.
     /// </summary>
     public partial class Error
     {
@@ -29,8 +29,9 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        /// <param name="code">Error code</param>
-        /// <param name="message">Error message</param>
+        /// <param name="code">Error code. Possible values include: '400',
+        /// '401', '403', '404', '405', '429', '500', '503'</param>
+        /// <param name="message">A description of the error.</param>
         public Error(string code = default(string), string message = default(string))
         {
             Code = code;
@@ -44,13 +45,14 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets error code
+        /// Gets or sets error code. Possible values include: '400', '401',
+        /// '403', '404', '405', '429', '500', '503'
         /// </summary>
         [JsonProperty(PropertyName = "code")]
         public string Code { get; set; }
 
         /// <summary>
-        /// Gets or sets error message
+        /// Gets or sets a description of the error.
         /// </summary>
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }

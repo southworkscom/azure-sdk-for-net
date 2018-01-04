@@ -10,13 +10,14 @@
 
 namespace Microsoft.Azure.BotFramework.Connector.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// Metdata for an attachment
+    /// Metadata for an attachment.
     /// </summary>
     public partial class AttachmentInfo
     {
@@ -31,10 +32,10 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// <summary>
         /// Initializes a new instance of the AttachmentInfo class.
         /// </summary>
-        /// <param name="name">Name of the attachment</param>
-        /// <param name="type">ContentType of the attachment</param>
-        /// <param name="views">attachment views</param>
-        public AttachmentInfo(string name = default(string), string type = default(string), IList<AttachmentView> views = default(IList<AttachmentView>))
+        /// <param name="type">ContentType of the attachment.</param>
+        /// <param name="views">attachment views.</param>
+        /// <param name="name">Name of the attachment.</param>
+        public AttachmentInfo(string type, IList<AttachmentView> views, string name = default(string))
         {
             Name = name;
             Type = type;
@@ -48,22 +49,39 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets name of the attachment
+        /// Gets or sets name of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets contentType of the attachment
+        /// Gets or sets contentType of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or sets attachment views
+        /// Gets or sets attachment views.
         /// </summary>
         [JsonProperty(PropertyName = "views")]
         public IList<AttachmentView> Views { get; set; }
 
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (Type == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Type");
+            }
+            if (Views == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Views");
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
     using System.Linq;
 
     /// <summary>
-    /// A audio card
+    /// A audio card.
     /// </summary>
     public partial class AudioCard
     {
@@ -32,21 +32,21 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
         /// Initializes a new instance of the AudioCard class.
         /// </summary>
         /// <param name="aspect">Aspect ratio of thumbnail/media placeholder,
-        /// allowed values are "16x9" and "9x16"</param>
-        /// <param name="title">Title of the card</param>
-        /// <param name="subtitle">Subtitle of the card</param>
-        /// <param name="text">Text of the card</param>
-        /// <param name="image">Thumbnail placeholder</param>
-        /// <param name="media">Array of media Url objects</param>
+        /// allowed values are "16:9" and "9:16".</param>
+        /// <param name="title">Title of the card.</param>
+        /// <param name="subtitle">Subtitle of the card.</param>
+        /// <param name="text">Text of the card.</param>
+        /// <param name="image">Thumbnail placeholder.</param>
+        /// <param name="media">Array of media Url objects.</param>
         /// <param name="buttons">Set of actions applicable to the current
-        /// card</param>
+        /// card.</param>
         /// <param name="shareable">Is it OK for this content to be shareable
-        /// with others (default:true)</param>
+        /// with others (default: true).</param>
         /// <param name="autoloop">Should the client loop playback at end of
-        /// content (default:true)</param>
+        /// content (default: true).</param>
         /// <param name="autostart">Should the client automatically start
-        /// playback of video in this card (default:true)</param>
-        /// <param name="value">Supplementary parameter for this card</param>
+        /// playback of video in this card (default: true).</param>
+        /// <param name="value">Supplementary parameter for this card.</param>
         public AudioCard(string aspect = default(string), string title = default(string), string subtitle = default(string), string text = default(string), ThumbnailUrl image = default(ThumbnailUrl), IList<MediaUrl> media = default(IList<MediaUrl>), IList<CardAction> buttons = default(IList<CardAction>), bool? shareable = default(bool?), bool? autoloop = default(bool?), bool? autostart = default(bool?), object value = default(object))
         {
             Aspect = aspect;
@@ -70,70 +70,70 @@ namespace Microsoft.Azure.BotFramework.Connector.Models
 
         /// <summary>
         /// Gets or sets aspect ratio of thumbnail/media placeholder, allowed
-        /// values are "16x9" and "9x16"
+        /// values are "16:9" and "9:16".
         /// </summary>
         [JsonProperty(PropertyName = "aspect")]
         public string Aspect { get; set; }
 
         /// <summary>
-        /// Gets or sets title of the card
+        /// Gets or sets title of the card.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets subtitle of the card
+        /// Gets or sets subtitle of the card.
         /// </summary>
         [JsonProperty(PropertyName = "subtitle")]
         public string Subtitle { get; set; }
 
         /// <summary>
-        /// Gets or sets text of the card
+        /// Gets or sets text of the card.
         /// </summary>
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
         /// <summary>
-        /// Gets or sets thumbnail placeholder
+        /// Gets or sets thumbnail placeholder.
         /// </summary>
         [JsonProperty(PropertyName = "image")]
         public ThumbnailUrl Image { get; set; }
 
         /// <summary>
-        /// Gets or sets array of media Url objects
+        /// Gets or sets array of media Url objects.
         /// </summary>
         [JsonProperty(PropertyName = "media")]
         public IList<MediaUrl> Media { get; set; }
 
         /// <summary>
-        /// Gets or sets set of actions applicable to the current card
+        /// Gets or sets set of actions applicable to the current card.
         /// </summary>
         [JsonProperty(PropertyName = "buttons")]
         public IList<CardAction> Buttons { get; set; }
 
         /// <summary>
         /// Gets or sets is it OK for this content to be shareable with others
-        /// (default:true)
+        /// (default: true).
         /// </summary>
         [JsonProperty(PropertyName = "shareable")]
         public bool? Shareable { get; set; }
 
         /// <summary>
         /// Gets or sets should the client loop playback at end of content
-        /// (default:true)
+        /// (default: true).
         /// </summary>
         [JsonProperty(PropertyName = "autoloop")]
         public bool? Autoloop { get; set; }
 
         /// <summary>
         /// Gets or sets should the client automatically start playback of
-        /// video in this card (default:true)
+        /// video in this card (default: true).
         /// </summary>
         [JsonProperty(PropertyName = "autostart")]
         public bool? Autostart { get; set; }
 
         /// <summary>
-        /// Gets or sets supplementary parameter for this card
+        /// Gets or sets supplementary parameter for this card.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public object Value { get; set; }
