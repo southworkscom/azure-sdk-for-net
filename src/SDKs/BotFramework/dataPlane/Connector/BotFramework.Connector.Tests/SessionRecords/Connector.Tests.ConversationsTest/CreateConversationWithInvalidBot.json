@@ -4,13 +4,13 @@
       "RequestUri": "/v3/conversations",
       "EncodedRequestUri": "L3YzL2NvbnZlcnNhdGlvbnM=",
       "RequestMethod": "POST",
-      "RequestBody": "{\r\n  \"bot\": {\r\n    \"id\": \"invalid-id\"\r\n  },\r\n  \"members\": [\r\n    {\r\n      \"id\": \"U8H8E2HSB:T03CWQ0QB\"\r\n    }\r\n  ],\r\n  \"activity\": {\r\n    \"type\": \"message\",\r\n    \"from\": {\r\n      \"id\": \"B21S8SG7J:T03CWQ0QB\"\r\n    },\r\n    \"recipient\": {\r\n      \"id\": \"U8H8E2HSB:T03CWQ0QB\"\r\n    },\r\n    \"text\": \"TEST Create Conversation\"\r\n  }\r\n}",
+      "RequestBody": "{\r\n  \"bot\": {\r\n    \"id\": \"invalid-id\"\r\n  },\r\n  \"members\": [\r\n    {\r\n      \"id\": \"U8H8E2HSB:T03CWQ0QB\"\r\n    }\r\n  ],\r\n  \"activity\": {\r\n    \"type\": \"message\",\r\n    \"from\": {\r\n      \"id\": \"B21S8SG7J:T03CWQ0QB\"\r\n    },\r\n    \"recipient\": {\r\n      \"id\": \"U8H8E2HSB:T03CWQ0QB\"\r\n    },\r\n    \"text\": \"TEST Create Conversation with invalid Bot\"\r\n  }\r\n}",
       "RequestHeaders": {
         "Content-Type": [
           "application/json; charset=utf-8"
         ],
         "Content-Length": [
-          "324"
+          "341"
         ],
         "User-Agent": [
           "FxVersion/4.6.25211.01",
@@ -32,7 +32,7 @@
           "no-cache"
         ],
         "Date": [
-          "Fri, 05 Jan 2018 18:51:20 GMT"
+          "Fri, 05 Jan 2018 21:18:26 GMT"
         ],
         "Pragma": [
           "no-cache"

@@ -4,21 +4,24 @@
       "RequestUri": "/v3/conversations",
       "EncodedRequestUri": "L3YzL2NvbnZlcnNhdGlvbnM=",
       "RequestMethod": "POST",
-      "RequestBody": "{\r\n  \"bot\": {\r\n    \"id\": \"B21S8SG7J:T03CWQ0QB\"\r\n  },\r\n  \"members\": [\r\n    {\r\n      \"id\": \"U8H8E2HSB:T03CWQ0QB\"\r\n    }\r\n  ],\r\n  \"activity\": {\r\n    \"type\": \"message\",\r\n    \"from\": {\r\n      \"id\": \"B21S8SG7J:T03CWQ0QB\"\r\n    },\r\n    \"recipient\": {\r\n      \"id\": \"U8H8E2HSB:T03CWQ0QB\"\r\n    },\r\n    \"text\": \"TEST Create Conversation\"\r\n  }\r\n}",
+      "RequestBody": "{\r\n  \"bot\": {\r\n    \"id\": \"B21S8SG7J:T03CWQ0QB\"\r\n  },\r\n  \"members\": [],\r\n  \"activity\": {\r\n    \"type\": \"message\",\r\n    \"from\": {\r\n      \"id\": \"B21S8SG7J:T03CWQ0QB\"\r\n    },\r\n    \"recipient\": {\r\n      \"id\": \"U8H8E2HSB:T03CWQ0QB\"\r\n    },\r\n    \"text\": \"TEST Create Conversation without members\"\r\n  }\r\n}",
       "RequestHeaders": {
         "Content-Type": [
           "application/json; charset=utf-8"
         ],
         "Content-Length": [
-          "333"
+          "296"
         ],
         "User-Agent": [
           "FxVersion/4.6.25211.01",
           "Microsoft.Azure.BotFramework.Connector.BotConnector/2.0.0.0"
         ]
       },
-      "ResponseBody": "{\r\n  \"activityId\": \"1515187112.000022\",\r\n  \"id\": \"B21S8SG7J:T03CWQ0QB:D8PNY7UQ7\"\r\n}",
+      "ResponseBody": "{\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Conversations must be to a single member\"\r\n  }\r\n}",
       "ResponseHeaders": {
+        "Content-Length": [
+          "110"
+        ],
         "Content-Type": [
           "application/json; charset=utf-8"
         ],
@@ -37,9 +40,6 @@
         "Server": [
           "Microsoft-IIS/10.0"
         ],
-        "Vary": [
-          "Accept-Encoding"
-        ],
         "Request-Context": [
           "appId=cid-v1:6814484e-c0d5-40ea-9dba-74ff29ca4f62"
         ],
@@ -50,7 +50,7 @@
           "max-age=31536000"
         ]
       },
-      "StatusCode": 200
+      "StatusCode": 400
     }
   ],
   "Names": {},
