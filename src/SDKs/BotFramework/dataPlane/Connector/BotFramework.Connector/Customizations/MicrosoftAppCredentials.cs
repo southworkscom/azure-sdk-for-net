@@ -22,6 +22,7 @@ namespace Microsoft.Azure.BotFramework.Connector
         /// </summary>
         public const string MicrosoftAppPasswordKey = "MicrosoftAppPassword";
 
+        // TODO: Complete list with proper TrustedHostNames
         protected static ConcurrentDictionary<string, DateTime> TrustedHostNames = new ConcurrentDictionary<string, DateTime>(
                                                                                         new Dictionary<string, DateTime>() {
                                                                                             { "state.botframework.com", DateTime.MaxValue }
@@ -150,16 +151,18 @@ namespace Microsoft.Azure.BotFramework.Connector
 
         private static bool TrustedUri(Uri uri)
         {
-            DateTime trustedServiceUrlExpiration;
-            if (TrustedHostNames.TryGetValue(uri.Host, out trustedServiceUrlExpiration))
-            {
-                // check if the trusted service url is still valid
-                if (trustedServiceUrlExpiration > DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(5)))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return true;
+
+            ////DateTime trustedServiceUrlExpiration;
+            ////if (TrustedHostNames.TryGetValue(uri.Host, out trustedServiceUrlExpiration))
+            ////{
+            ////    // check if the trusted service url is still valid
+            ////    if (trustedServiceUrlExpiration > DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(5)))
+            ////    {
+            ////        return true;
+            ////    }
+            ////}
+            ////return false;
         }
 
         public sealed class OAuthException : Exception
