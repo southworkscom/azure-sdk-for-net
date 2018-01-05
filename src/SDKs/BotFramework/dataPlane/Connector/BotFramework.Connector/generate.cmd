@@ -4,4 +4,4 @@
 ::
 
 @echo off
-call %~dp0..\..\..\..\..\tools\generate.cmd botframework/data-plane/connector %*
+call %~dp0..\..\..\..\..\..\tools\generate.cmd botframework/data-plane/connector %*
