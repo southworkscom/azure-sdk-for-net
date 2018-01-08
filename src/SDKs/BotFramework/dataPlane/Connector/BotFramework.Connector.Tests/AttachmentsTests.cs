@@ -13,7 +13,6 @@
         [Fact]
         public void UploadAttachmentAndGetAttachment()
         {
-
             UseClientFor(async client =>
             {
                 var attachment = new AttachmentData("image/png", ReadFile("bot.png"), "Bot.png", ReadFile("bot_icon.png"));
@@ -70,23 +69,24 @@
             });
         }
 
-        ////[Fact]
-        ////public void GetAttachmentView()
-        ////{
+        [Fact]
+        public void GetAttachmentView()
+        {
+            UseClientFor(async client =>
+            {
+                var attachment = new AttachmentData("image/png", ReadFile("bot.png"), "Bot.png", ReadFile("bot_icon.png"));
+                var response = await client.Conversations.UploadAttachmentAsync(conversationId, attachment);
+                var attachmentId = response.Id;
+                var stream = await client.Attachments.GetAttachmentAsync(attachmentId, "original");
 
-        ////    UseClientFor(async client =>
-        ////    {
-        ////        var attachment = new AttachmentData("image/png", ReadFile("bot.png"), "Bot.png", ReadFile("bot_icon.png"));
-        ////        var response = await client.Conversations.UploadAttachmentAsync(conversationId, attachment);
-        ////        var attachmentId = response.Id;
-        ////        var stream = await client.Attachments.GetAttachmentAsync(attachmentId, "original");
-        ////        using (var ms = new MemoryStream())
-        ////        {
-        ////            stream.CopyTo(ms);
-        ////            Assert.Equal(attachment.OriginalBase64.Length, ms.ToArray().Length);
-        ////        }
-        ////    });
-        ////}
+                // Workaround for TestFramework not saving/replaying binary content
+                // Instead, convert the expected output the same way that the TestRecorder converts binary content to string
+                var expectedAsString = new StreamReader(new MemoryStream(attachment.OriginalBase64)).ReadToEnd();
+                var actualAsString = new StreamReader(stream).ReadToEnd();
+
+                Assert.Equal(expectedAsString, actualAsString);
+            });
+        }
 
         private byte[] ReadFile(string fileName)
         {
