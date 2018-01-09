@@ -1,5 +1,6 @@
 ﻿namespace Connector.Tests
 {
+    using System;
     using System.IO;
     using Microsoft.Azure.BotFramework.Connector;
     using Microsoft.Azure.BotFramework.Connector.Models;
@@ -87,6 +88,32 @@
                 Assert.Equal(expectedAsString, actualAsString);
             });
         }
+
+        [Fact]
+        public void GetAttachmentViewWithInvalidAttachmentIdFails()
+        {
+            UseClientFor(async client =>
+            {
+                var ex = await Assert.ThrowsAsync<HttpOperationException>(() => client.Attachments.GetAttachmentAsync("bt13796-GJS4yaxDLI", "original"));
+                Assert.Contains("NotFound", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void GetAttachmentViewWithInvalidViewIdFails()
+        {
+
+            UseClientFor(async client =>
+            {
+                var attachment = new AttachmentData("image/png", ReadFile("bot.png"), "Bot.png", ReadFile("bot_icon.png"));
+                var response = await client.Conversations.UploadAttachmentAsync(conversationId, attachment);
+
+                var ex = await Assert.ThrowsAsync<HttpOperationException>(() => client.Attachments.GetAttachmentAsync(response.Id, "invalid"));
+
+                Assert.Contains("NotFound", ex.Message);
+            });
+        }
+        
 
         private byte[] ReadFile(string fileName)
         {
