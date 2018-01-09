@@ -13,11 +13,11 @@
           "14108"
         ],
         "User-Agent": [
-          "FxVersion/4.6.25815.04",
-          "Microsoft.Azure.BotFramework.Connector.BotConnector/0.0.0.0"
+          "FxVersion/4.6.25211.01",
+          "Microsoft.Azure.BotFramework.Connector.BotConnector/2.0.0.0"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"at14036-FQ2mtJJ2tc0\"\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"at14127-CWg6c8nQGVH\"\r\n}",
       "ResponseHeaders": {
         "Content-Type": [
           "application/json; charset=utf-8"
@@ -29,13 +29,16 @@
           "no-cache"
         ],
         "Date": [
-          "Fri, 05 Jan 2018 19:29:20 GMT"
+          "Tue, 09 Jan 2018 14:31:09 GMT"
         ],
         "Pragma": [
           "no-cache"
         ],
         "Server": [
           "Microsoft-IIS/10.0"
+        ],
+        "Set-Cookie": [
+          "ARRAffinity=cfaeda5806a3768888e707969568c07d2824ec67e3dd88e924400998c026e3ff;Path=/;HttpOnly;Domain=slack.botframework.com"
         ],
         "Vary": [
           "Accept-Encoding"
@@ -53,17 +56,17 @@
       "StatusCode": 200
     },
     {
-      "RequestUri": "/v3/attachments/at14036-FQ2mtJJ2tc0",
-      "EncodedRequestUri": "L3YzL2F0dGFjaG1lbnRzL2F0MTQwMzYtRlEybXRKSjJ0YzA=",
+      "RequestUri": "/v3/attachments/at14127-CWg6c8nQGVH",
+      "EncodedRequestUri": "L3YzL2F0dGFjaG1lbnRzL2F0MTQxMjctQ1dnNmM4blFHVkg=",
       "RequestMethod": "GET",
       "RequestBody": "",
       "RequestHeaders": {
         "User-Agent": [
-          "FxVersion/4.6.25815.04",
-          "Microsoft.Azure.BotFramework.Connector.BotConnector/0.0.0.0"
+          "FxVersion/4.6.25211.01",
+          "Microsoft.Azure.BotFramework.Connector.BotConnector/2.0.0.0"
         ]
       },
-      "ResponseBody": "{\r\n  \"name\": \"Bot.png\",\r\n  \"type\": \"image/png\",\r\n  \"views\": [\r\n    {\r\n      \"viewId\": \"thumbnail\",\r\n      \"size\": 1899\r\n    },\r\n    {\r\n      \"viewId\": \"original\",\r\n      \"size\": 8605\r\n    }\r\n  ]\r\n}",
+      "ResponseBody": "{\r\n  \"name\": \"Bot.png\",\r\n  \"type\": \"image/png\",\r\n  \"views\": [\r\n    {\r\n      \"viewId\": \"original\",\r\n      \"size\": 8605\r\n    },\r\n    {\r\n      \"viewId\": \"thumbnail\",\r\n      \"size\": 1899\r\n    }\r\n  ]\r\n}",
       "ResponseHeaders": {
         "Content-Type": [
           "application/json; charset=utf-8"
@@ -75,7 +78,7 @@
           "no-cache"
         ],
         "Date": [
-          "Fri, 05 Jan 2018 19:29:21 GMT"
+          "Tue, 09 Jan 2018 14:31:09 GMT"
         ],
         "Pragma": [
           "no-cache"

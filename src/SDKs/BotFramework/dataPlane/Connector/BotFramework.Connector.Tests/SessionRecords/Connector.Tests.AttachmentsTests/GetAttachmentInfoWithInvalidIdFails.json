@@ -7,8 +7,8 @@
       "RequestBody": "",
       "RequestHeaders": {
         "User-Agent": [
-          "FxVersion/4.6.25815.04",
-          "Microsoft.Azure.BotFramework.Connector.BotConnector/0.0.0.0"
+          "FxVersion/4.6.25211.01",
+          "Microsoft.Azure.BotFramework.Connector.BotConnector/2.0.0.0"
         ]
       },
       "ResponseBody": "\"NotFound\"",
@@ -26,13 +26,16 @@
           "no-cache"
         ],
         "Date": [
-          "Fri, 05 Jan 2018 19:32:08 GMT"
+          "Tue, 09 Jan 2018 14:31:06 GMT"
         ],
         "Pragma": [
           "no-cache"
         ],
         "Server": [
           "Microsoft-IIS/10.0"
+        ],
+        "Set-Cookie": [
+          "ARRAffinity=cfaeda5806a3768888e707969568c07d2824ec67e3dd88e924400998c026e3ff;Path=/;HttpOnly;Domain=slack.botframework.com"
         ],
         "Request-Context": [
           "appId=cid-v1:6814484e-c0d5-40ea-9dba-74ff29ca4f62"
