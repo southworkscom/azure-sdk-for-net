@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using Microsoft.Azure.BotFramework.Connector;
     using Microsoft.Azure.BotFramework.Connector.Models;
+    using Microsoft.Rest;
     using Xunit;
 
     public class ConversationsTest : BaseTest
@@ -110,6 +111,16 @@
         }
 
         [Fact]
+        public void CreateConversationWithNullParameter()
+        {
+            UseClientFor(async client =>
+            {
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.CreateConversationAsync(null));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
         public void GetConversationMembers()
         {
             var createMessage = new ConversationParameters()
@@ -151,6 +162,17 @@
                 var ex = await Assert.ThrowsAsync<ErrorResponseException>(() => client.Conversations.GetConversationMembersAsync(string.Concat(conversation.Id, "M")));
                 Assert.Equal("ServiceError", ex.Body.Error.Code);
                 Assert.Contains("The specified channel was not found", ex.Body.Error.Message);
+            });
+        }
+
+        [Fact]
+        public void GetConversationMembersWithNullConversationId()
+        {
+
+            UseClientFor(async client =>
+            {
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.GetConversationMembersAsync(null));
+                Assert.Contains("cannot be null", ex.Message);
             });
         }
 
@@ -234,6 +256,49 @@
                 var ex = await Assert.ThrowsAsync<ErrorResponseException>(() => client.Conversations.SendToConversationAsync(string.Concat(conversation.Id, "M"), activity));
                 Assert.Equal("MissingProperty", ex.Body.Error.Code);
                 Assert.Equal("The bot referenced by the 'from' field is unrecognized", ex.Body.Error.Message);
+            });
+        }
+
+        [Fact]
+        public void SendToConversationWithNullConversationId()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Name = "acticity",
+                Text = "TEST Send to Conversation with null conversation id"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot,
+                Activity = activity
+            };
+
+            UseClientFor(async client =>
+            {
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.SendToConversationAsync(null, activity));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void SendToConversationWithNullActivity()
+        {
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.SendToConversationAsync(conversation.Id, null));
+                Assert.Contains("cannot be null", ex.Message);
             });
         }
 
@@ -350,6 +415,58 @@
         }
 
         [Fact]
+        public void GetActivityMembersWithNullConversationId()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Get Activity Members with null conversation id"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot,
+                Activity = activity
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.GetActivityMembersAsync(null, conversation.ActivityId));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void GetActivityMembersWithNullActivityId()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Get Activity Members with null activity id"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot,
+                Activity = activity
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.GetActivityMembersAsync(conversation.Id, null));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
         public void ReplyToActivity()
         {
             var activity = new Activity()
@@ -421,6 +538,103 @@
         }
 
         [Fact]
+        public void ReplyToActivityWithNullConversationId()
+        {
+
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Reply activity with null conversation id"
+            };
+
+            var reply = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Reply mustn't shown"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var response = await client.Conversations.SendToConversationAsync(conversation.Id, activity);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.ReplyToActivityAsync(null, response.Id, reply));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void ReplyToActivityWithNullActivityId()
+        {
+
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Reply activity with null activity id"
+            };
+
+            var reply = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Reply mustn't shown"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var response = await client.Conversations.SendToConversationAsync(conversation.Id, activity);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.ReplyToActivityAsync(conversation.Id, null, reply));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void ReplyToActivityWithNullReply()
+        {
+
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Reply activity with null reply"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var response = await client.Conversations.SendToConversationAsync(conversation.Id, activity);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.ReplyToActivityAsync(conversation.Id, response.Id, null));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
         public void DeleteActivity()
         {
             var activity = new Activity()
@@ -470,6 +684,58 @@
                 var ex = await Assert.ThrowsAsync<ErrorResponseException>(() => client.Conversations.DeleteActivityAsync("B21S8SG7K:T03CWQ0QB", conversation.ActivityId));
                 Assert.Equal("ServiceError", ex.Body.Error.Code);
                 Assert.Contains("Invalid ConversationId", ex.Body.Error.Message);
+            });
+        }
+
+        [Fact]
+        public void DeleteActivityWithNullConversationId()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Activity to be deleted with null conversation Id"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot,
+                Activity = activity
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.DeleteActivityAsync(null, conversation.ActivityId));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void DeleteActivityWithNullActivityId()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Activity to be deleted with null activity Id"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot,
+                Activity = activity
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.DeleteActivityAsync("B21S8SG7K:T03CWQ0QB", null));
+                Assert.Contains("cannot be null", ex.Message);
             });
         }
 
@@ -540,6 +806,100 @@
                 var ex = await Assert.ThrowsAsync<ErrorResponseException>(() => client.Conversations.UpdateActivityAsync("B21S8SG7K:T03CWQ0QB", response.Id, update));
                 Assert.Equal("ServiceError", ex.Body.Error.Code);
                 Assert.Contains("Invalid ConversationId", ex.Body.Error.Message);
+            });
+        }
+
+        [Fact]
+        public void UpdateActivityWithNullConversationId()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Activity to be updated with null conversation Id"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var response = await client.Conversations.SendToConversationAsync(conversation.Id, activity);
+                var update = new Activity()
+                {
+                    Id = response.Id,
+                    Type = ActivityType.Message,
+                    Recipient = User,
+                    FromProperty = Bot,
+                    Text = "TEST Activity mustn't be updated"
+                };
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.UpdateActivityAsync(null, response.Id, update));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void UpdateActivityWithNullActivityId()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Activity to be updated with null activity Id"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var response = await client.Conversations.SendToConversationAsync(conversation.Id, activity);
+                var update = new Activity()
+                {
+                    Id = response.Id,
+                    Type = ActivityType.Message,
+                    Recipient = User,
+                    FromProperty = Bot,
+                    Text = "TEST Activity mustn't be updated"
+                };
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.UpdateActivityAsync(conversation.Id, null, update));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void UpdateActivityWithNullActivity()
+        {
+            var activity = new Activity()
+            {
+                Type = ActivityType.Message,
+                Recipient = User,
+                FromProperty = Bot,
+                Text = "TEST Activity to be updated with null activity"
+            };
+
+            var createMessage = new ConversationParameters()
+            {
+                Members = new ChannelAccount[] { User },
+                Bot = Bot
+            };
+
+            UseClientFor(async client =>
+            {
+                var conversation = await client.Conversations.CreateConversationAsync(createMessage);
+                var response = await client.Conversations.SendToConversationAsync(conversation.Id, activity);
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.UpdateActivityAsync(conversation.Id, response.Id, null));
+                Assert.Contains("cannot be null", ex.Message);
             });
         }
 

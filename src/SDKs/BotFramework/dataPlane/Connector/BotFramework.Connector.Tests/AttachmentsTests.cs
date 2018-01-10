@@ -61,12 +61,44 @@
         }
 
         [Fact]
+        public void UploadAttachmentWithNullConversationId()
+        {
+            UseClientFor(async client =>
+            {
+                var attachment = new AttachmentData("image/png", ReadFile("bot.png"), "Bot.png", ReadFile("bot_icon.png"));
+
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.UploadAttachmentAsync(null, attachment));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void UploadAttachmentWithNullAttachment()
+        {
+            UseClientFor(async client =>
+            {
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Conversations.UploadAttachmentAsync(conversationId, null));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
         public void GetAttachmentInfoWithInvalidIdFails()
         {
             UseClientFor(async client =>
             {
                 var ex = await Assert.ThrowsAsync<ErrorResponseException>(() => client.Attachments.GetAttachmentInfoAsync("bt13796-GJS4yaxDLI"));
                 Assert.Contains("NotFound", ex.Message);
+            });
+        }
+
+        [Fact]
+        public void GetAttachmentInfoWithNullIdFails()
+        {
+            UseClientFor(async client =>
+            {
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Attachments.GetAttachmentInfoAsync(null));
+                Assert.Contains("cannot be null", ex.Message);
             });
         }
 
@@ -100,6 +132,17 @@
         }
 
         [Fact]
+        public void GetAttachmentViewWithNullAttachmentIdFails()
+        {
+
+            UseClientFor(async client =>
+            {
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Attachments.GetAttachmentAsync(null, "original"));
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
+
+        [Fact]
         public void GetAttachmentViewWithInvalidViewIdFails()
         {
 
@@ -113,7 +156,21 @@
                 Assert.Contains("NotFound", ex.Message);
             });
         }
-        
+
+        [Fact]
+        public void GetAttachmentViewWithNullViewIdFails()
+        {
+
+            UseClientFor(async client =>
+            {
+                var attachment = new AttachmentData("image/png", ReadFile("bot.png"), "Bot.png", ReadFile("bot_icon.png"));
+                var response = await client.Conversations.UploadAttachmentAsync(conversationId, attachment);
+
+                var ex = await Assert.ThrowsAsync<ValidationException>(() => client.Attachments.GetAttachmentAsync(response.Id, null));
+
+                Assert.Contains("cannot be null", ex.Message);
+            });
+        }
 
         private byte[] ReadFile(string fileName)
         {
