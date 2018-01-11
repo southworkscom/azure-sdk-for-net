@@ -2,7 +2,7 @@
 
 ### Getting Started
 
-Bot Framework Connector allows you to build applications that connects with Bot Framework API
+Bot Framework Connector allows you to build applications that connects with Bot Framework Connector service.
 
 ### Target Frameworks:
 
@@ -16,7 +16,8 @@ Install Bot Framework Connector by launching the command:
     nuget install Microsoft.Azure.BotFramework.Connector
 
 ### API Documentation
- For API Documentation, please see our [API reference](https://docs.microsoft.com/en-us/Bot-Framework/rest-api/bot-framework-rest-connector-api-reference).
+
+For API Documentation, please see our [API reference](https://docs.microsoft.com/en-us/Bot-Framework/rest-api/bot-framework-rest-connector-api-reference).
 
 ### Samples
 
